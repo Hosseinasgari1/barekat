@@ -1,0 +1,28 @@
+# Dependencies
+**/node_modules/
+backend/venv/
+
+# Local databases
+backend/db.sqlite3
+
+# Environment files
+.env
+.env*.local
+frontend/.env
+
+# Build outputs
+frontend/dist/
+
+# OS/System files
+.DS_Store
+Thumbs.db
+*.log
+
+# IDEs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
