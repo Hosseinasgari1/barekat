@@ -125,92 +125,138 @@ const Login = () => {
     `${Math.floor(s / 60).toString().padStart(2, '0')}:${(s % 60).toString().padStart(2, '0')}`;
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-emerald-50 via-white to-green-50" dir="rtl">
-      {/* Background blobs */}
-      <div className="absolute top-20 right-10 w-80 h-80 bg-emerald-200/20 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-20 left-10 w-80 h-80 bg-green-200/20 rounded-full blur-[100px] pointer-events-none" />
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 bg-gradient-to-b from-amber-50 via-white to-emerald-50" dir="rtl">
+      {/* Warm decorative elements */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-amber-200/20 rounded-full blur-[80px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-emerald-200/15 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/4 w-40 h-40 bg-amber-100/30 rounded-full blur-[60px] pointer-events-none" />
 
-      <div className="w-full max-w-sm z-10">
-        {/* Logo */}
-        <div className="flex flex-col items-center mb-8">
-          <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-emerald-500 to-green-400 flex items-center justify-center shadow-2xl shadow-emerald-500/30 mb-4">
-            <span className="text-white font-black text-4xl">ب</span>
-          </div>
-          <h1 className="text-3xl font-black text-slate-900">برکت</h1>
-          <p className="text-slate-500 text-sm mt-1">کاهش پسماند، اشتراک غذا</p>
+      <div className="w-full max-w-sm z-10 page-enter">
+        {/* Illustration - Old man with bag */}
+        <div className="flex justify-center mb-4 animate-float">
+          <img 
+            src="/old-man.svg" 
+            alt="پدربزرگ مهربان با کیسه برکت" 
+            className="w-48 h-auto drop-shadow-lg"
+          />
         </div>
 
-        <div className="bg-white rounded-3xl shadow-xl shadow-slate-200/60 p-7 border border-slate-100">
+        {/* Brand name */}
+        <div className="text-center mb-6">
+          <h1 className="text-4xl font-black text-emerald-800 mb-2">برکت</h1>
+          <p className="text-amber-700 text-sm font-semibold">غذای اضافی، قیمت مناسب، سفره پربرکت</p>
+          <div className="flex items-center justify-center gap-2 mt-2">
+            <span className="text-xs text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">
+              🌱 کاهش پسماند غذا
+            </span>
+            <span className="text-xs text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-100">
+              ❤️ اشتراک‌گذاری
+            </span>
+          </div>
+        </div>
+
+        {/* Login card */}
+        <div className="bg-white rounded-3xl shadow-xl shadow-amber-100/40 p-6 border border-amber-100/50">
           {step === 1 ? (
             <form onSubmit={handleSendCode} className="space-y-5">
-              <div>
-                <h2 className="text-xl font-black text-slate-800 mb-1">ورود / ثبت‌نام</h2>
-                <p className="text-slate-500 text-xs">شماره موبایل خود را وارد کنید</p>
+              <div className="text-center">
+                <h2 className="text-xl font-black text-slate-800 mb-1">به برکت خوش آمدید! 👋</h2>
+                <p className="text-slate-500 text-xs">برای شروع، شماره موبایل خود را وارد کنید</p>
               </div>
-              {error && <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-sm font-medium">{error}</div>}
-              <input
-                type="text"
-                required
-                placeholder="09123456789"
-                value={phoneNumber}
-                onChange={e => setPhoneNumber(e.target.value)}
-                className="w-full px-4 py-4 rounded-2xl bg-slate-50 border border-slate-200 text-slate-800 text-center tracking-widest text-xl font-bold focus:outline-none focus:border-emerald-500 focus:bg-white transition-all"
-              />
+              {error && (
+                <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-sm font-medium text-center">
+                  {error}
+                </div>
+              )}
+              <div className="relative">
+                <input
+                  type="text"
+                  required
+                  placeholder="09123456789"
+                  value={phoneNumber}
+                  onChange={e => setPhoneNumber(e.target.value)}
+                  className="w-full px-4 py-4 rounded-2xl bg-amber-50/50 border-2 border-amber-200 text-slate-800 text-center tracking-widest text-xl font-bold focus:outline-none focus:border-emerald-500 focus:bg-white transition-all placeholder:text-amber-300"
+                />
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-2xl">📱</span>
+              </div>
               <button
                 type="submit"
                 disabled={isSending || !isPhoneValid}
-                className="w-full py-4 rounded-2xl font-black text-base bg-gradient-to-r from-emerald-600 to-green-500 text-white shadow-lg shadow-emerald-500/30 hover:brightness-105 active:scale-[0.98] transition-all disabled:opacity-50"
+                className="w-full py-4 rounded-2xl font-black text-base bg-gradient-to-r from-emerald-600 to-emerald-500 text-white shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/40 hover:brightness-105 active:scale-[0.98] transition-all disabled:opacity-50 disabled:shadow-none"
               >
-                {isSending ? '⏳ در حال ارسال...' : 'دریافت کد تایید →'}
+                {isSending ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <span className="animate-spin">⏳</span> در حال ارسال...
+                  </span>
+                ) : (
+                  'دریافت کد تایید ✨'
+                )}
               </button>
             </form>
           ) : (
             <form onSubmit={handleVerifyCode} className="space-y-5">
-              <div>
-                <h2 className="text-xl font-black text-slate-800 mb-1">کد تایید</h2>
-                <p className="text-slate-500 text-xs">کد ۵ رقمی ارسال شده به {phoneNumber} را وارد کنید</p>
+              <div className="text-center">
+                <h2 className="text-xl font-black text-slate-800 mb-1">کد تایید را وارد کنید</h2>
+                <p className="text-slate-500 text-xs">کد ۵ رقمی ارسال شده به <span className="font-bold text-emerald-600">{phoneNumber}</span></p>
               </div>
-              {error && <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-sm font-medium">{error}</div>}
-              {mockOtp && (
-                <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-center">
-                  <p className="text-xs text-emerald-600 font-semibold mb-1">کد تستی شما:</p>
-                  <span className="text-2xl font-black tracking-[0.4em] text-emerald-700 select-all">{mockOtp}</span>
+              {error && (
+                <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-sm font-medium text-center">
+                  {error}
                 </div>
               )}
-              <input
-                type="text"
-                maxLength={5}
-                required
-                placeholder="• • • • •"
-                value={otp}
-                onChange={e => setOtp(e.target.value.replace(/\D/g, ''))}
-                className="w-full px-4 py-4 rounded-2xl bg-slate-50 border border-slate-200 text-center tracking-[1em] text-2xl font-black focus:outline-none focus:border-emerald-500 focus:bg-white transition-all"
-              />
-              <div className="flex items-center justify-between text-sm">
+              {mockOtp && (
+                <div className="p-4 rounded-2xl bg-emerald-50 border-2 border-emerald-200 text-center animate-bounce-in">
+                  <p className="text-xs text-emerald-600 font-semibold mb-2">کد تستی شما:</p>
+                  <span className="text-3xl font-black tracking-[0.5em] text-emerald-700 select-all">{mockOtp}</span>
+                </div>
+              )}
+              <div className="relative">
+                <input
+                  type="text"
+                  maxLength={5}
+                  required
+                  placeholder="• • • • •"
+                  value={otp}
+                  onChange={e => setOtp(e.target.value.replace(/\D/g, ''))}
+                  className="w-full px-4 py-4 rounded-2xl bg-amber-50/50 border-2 border-amber-200 text-center tracking-[1.2em] text-2xl font-black focus:outline-none focus:border-emerald-500 focus:bg-white transition-all"
+                />
+              </div>
+              <div className="flex items-center justify-between text-sm px-1">
                 {timer > 0
-                  ? <span className="text-slate-500 font-semibold">⏱ {fmt(timer)}</span>
-                  : <span className="text-red-500 font-semibold text-xs">کد منقضی شد</span>}
+                  ? <span className="text-slate-500 font-semibold flex items-center gap-1">⏱ {fmt(timer)}</span>
+                  : <span className="text-red-500 font-semibold text-xs">⏰ کد منقضی شد</span>}
                 <button type="button" disabled={timer > 0 || isSending} onClick={() => handleSendCode()}
-                  className="text-emerald-600 font-bold text-sm disabled:text-slate-300 disabled:cursor-not-allowed">
-                  ارسال مجدد
+                  className="text-emerald-600 font-bold text-sm disabled:text-slate-300 disabled:cursor-not-allowed hover:text-emerald-700 transition">
+                  ارسال مجدد 🔄
                 </button>
               </div>
               <div className="flex gap-3">
                 <button
                   type="submit"
                   disabled={isVerifying || otp.length !== 5}
-                  className="flex-1 py-4 rounded-2xl font-black bg-gradient-to-r from-emerald-600 to-green-500 text-white shadow-lg shadow-emerald-500/30 hover:brightness-105 active:scale-[0.98] transition-all disabled:opacity-50"
+                  className="flex-1 py-4 rounded-2xl font-black bg-gradient-to-r from-emerald-600 to-emerald-500 text-white shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/40 hover:brightness-105 active:scale-[0.98] transition-all disabled:opacity-50"
                 >
-                  {isVerifying ? '⏳ بررسی...' : 'ورود ✓'}
+                  {isVerifying ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <span className="animate-spin">⏳</span> بررسی...
+                    </span>
+                  ) : (
+                    'ورود به برکت ✅'
+                  )}
                 </button>
-                <button type="button" onClick={() => setStep(1)}
-                  className="px-5 py-4 rounded-2xl font-bold border border-slate-200 text-slate-600 hover:bg-slate-50 transition-all">
+                <button type="button" onClick={() => { setStep(1); setError(''); }}
+                  className="px-5 py-4 rounded-2xl font-bold border-2 border-amber-200 text-slate-600 hover:bg-amber-50 hover:border-amber-300 transition-all">
                   بازگشت
                 </button>
               </div>
             </form>
           )}
         </div>
+
+        {/* Footer */}
+        <p className="text-center text-xs text-slate-400 mt-6">
+          با ورود، <span className="text-emerald-600">شرایط استفاده</span> و <span className="text-emerald-600">حریم خصوصی</span> را می‌پذیرید
+        </p>
       </div>
     </div>
   );
@@ -225,58 +271,77 @@ const AppLayout = () => {
   const { userInfo } = useSelector((state: RootState) => state.auth);
 
   const tabs = [
-    { path: '/app/discover', icon: '🏠', label: 'خانه' },
-    { path: '/app/orders', icon: '📋', label: 'سفارش‌ها' },
-    { path: '/app/shop', icon: '🏪', label: 'فروش محصولات' },
-    { path: '/app/profile', icon: '👤', label: 'پروفایل' },
+    { path: '/app/discover', icon: '🏠', label: 'خانه', activeIcon: '🏡' },
+    { path: '/app/orders', icon: '📋', label: 'سفارشها', activeIcon: '📦' },
+    { path: '/app/shop', icon: '🏪', label: 'فروشگاه', activeIcon: '🛍️' },
+    { path: '/app/profile', icon: '👤', label: 'پروفایل', activeIcon: '👨‍💼' },
   ];
 
   return (
-    <div className="min-h-screen bg-[#f5f5f5] flex flex-col" dir="rtl">
-      {/* Top bar */}
-      <header className="bg-white border-b border-slate-100 sticky top-0 z-40 shadow-sm">
-        <div className="max-w-lg mx-auto px-4 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-500 to-green-400 flex items-center justify-center shadow-md shadow-emerald-500/20">
-              <span className="text-white font-black text-sm">ب</span>
+    <div className="min-h-screen bg-gradient-to-b from-amber-50/30 to-emerald-50/20 flex flex-col" dir="rtl">
+      {/* Top bar - Warm friendly header */}
+      <header className="bg-white/90 backdrop-blur-md border-b border-amber-100/50 sticky top-0 z-40 shadow-sm">
+        <div className="max-w-lg mx-auto px-4 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-md shadow-emerald-500/20">
+              <span className="text-white font-black text-lg">ب</span>
             </div>
-            <span className="font-black text-emerald-700 text-lg">برکت</span>
+            <div>
+              <span className="font-black text-emerald-800 text-lg block leading-tight">برکت</span>
+              <span className="text-[10px] text-amber-600 font-semibold">🌱 سفره پربرکت</span>
+            </div>
           </div>
           <div className="flex items-center gap-3">
-            <span className="text-xs text-slate-500 font-semibold bg-slate-100 px-3 py-1.5 rounded-full">
-              {userInfo?.first_name || userInfo?.phone_number || 'کاربر برکت'}
-            </span>
+            <div className="flex items-center gap-2 bg-amber-50 px-3 py-1.5 rounded-full border border-amber-100">
+              <span className="text-lg">👋</span>
+              <span className="text-xs text-amber-800 font-bold">
+                {userInfo?.first_name || 'دوست عزیز'}
+              </span>
+            </div>
             <button
               onClick={() => dispatch(logout())}
-              className="w-8 h-8 flex items-center justify-center rounded-full bg-red-50 text-red-500 hover:bg-red-100 transition text-sm font-bold"
-              title="خروج"
+              className="w-9 h-9 flex items-center justify-center rounded-full bg-red-50 text-red-500 hover:bg-red-100 transition-all hover:scale-105 active:scale-95"
+              title="خروج از حساب"
             >
-              ✕
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                <polyline points="16 17 21 12 16 7"/>
+                <line x1="21" y1="12" x2="9" y2="12"/>
+              </svg>
             </button>
           </div>
         </div>
       </header>
 
       {/* Page content */}
-      <main className="flex-grow max-w-lg mx-auto w-full px-4 py-5 pb-28">
+      <main className="flex-grow max-w-lg mx-auto w-full px-4 py-5 pb-28 page-enter">
         <Outlet />
       </main>
 
-      {/* Snapp-style bottom navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-slate-100 shadow-lg">
-        <div className="max-w-lg mx-auto px-4 h-16 flex items-center justify-around">
+      {/* Bottom navigation - Warm friendly style */}
+      <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-amber-100/50 shadow-lg shadow-amber-100/20">
+        <div className="max-w-lg mx-auto px-2 h-18 flex items-center justify-around">
           {tabs.map(t => {
             const isActive = pathname === t.path;
             return (
               <Link
                 key={t.path}
                 to={t.path}
-                className={`flex flex-col items-center justify-center w-16 h-full transition ${
-                  isActive ? 'text-emerald-600' : 'text-slate-400 hover:text-slate-600'
+                className={`flex flex-col items-center justify-center w-16 py-2 rounded-2xl transition-all duration-300 ${
+                  isActive 
+                    ? 'text-emerald-700 bg-emerald-50 scale-105 shadow-sm' 
+                    : 'text-slate-400 hover:text-slate-600 hover:bg-amber-50/50'
                 }`}
               >
-                <span className="text-xl">{t.icon}</span>
-                <span className="text-[10px] font-bold mt-1">{t.label}</span>
+                <span className={`text-xl transition-transform duration-300 ${isActive ? 'scale-110' : ''}`}>
+                  {isActive ? t.activeIcon : t.icon}
+                </span>
+                <span className={`text-[10px] mt-1 transition-all ${isActive ? 'font-black' : 'font-bold'}`}>
+                  {t.label}
+                </span>
+                {isActive && (
+                  <div className="w-1 h-1 rounded-full bg-emerald-500 mt-1" />
+                )}
               </Link>
             );
           })}

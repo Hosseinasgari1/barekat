@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 450" width="400" height="450">
+  <defs>
+    <linearGradient id="bag-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981"/>
+      <stop offset="100%" style="stop-color:#059669"/>
+    </linearGradient>
+    <linearGradient id="skin-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5d0a9"/>
+      <stop offset="100%" style="stop-color:#e8b88a"/>
+    </linearGradient>
+    <linearGradient id="vest-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="pants-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#475569"/>
+      <stop offset="100%" style="stop-color:#334155"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Background circle glow -->
+  <circle cx="200" cy="230" r="180" fill="#10b981" opacity="0.08"/>
+  <circle cx="200" cy="230" r="140" fill="#10b981" opacity="0.06"/>
+
+  <!-- ===== BAG (behind body) ===== -->
+  <g filter="url(#shadow)">
+    <!-- Bag body -->
+    <path d="M120 280 L100 400 Q100 420 120 420 L280 420 Q300 420 300 400 L280 280 Z" fill="url(#bag-gradient)"/>
+    <!-- Bag fold/top -->
+    <path d="M110 270 Q110 260 120 260 L280 260 Q290 260 290 270 L290 280 L110 280 Z" fill="#059669"/>
+    <!-- Bag opening fold -->
+    <path d="M115 275 Q200 290 285 275" fill="none" stroke="#047857" stroke-width="2"/>
+    <!-- Bag texture lines -->
+    <line x1="140" y1="300" x2="140" y2="400" stroke="#047857" stroke-width="1" opacity="0.3"/>
+    <line x1="200" y1="300" x2="200" y2="400" stroke="#047857" stroke-width="1" opacity="0.3"/>
+    <line x1="260" y1="300" x2="260" y2="400" stroke="#047857" stroke-width="1" opacity="0.3"/>
+    
+    <!-- Food items peeking out -->
+    <!-- Carrot -->
+    <g transform="translate(150, 240) rotate(-15)">
+      <path d="M0 0 L-8 40 L8 40 Z" fill="#f97316"/>
+      <path d="M-3 0 Q0 -15 3 0" fill="#22c55e"/>
+    </g>
+    <!-- Bread -->
+    <g transform="translate(200, 235)">
+      <ellipse cx="0" cy="15" rx="20" ry="12" fill="#f59e0b"/>
+      <ellipse cx="0" cy="10" rx="18" ry="8" fill="#fbbf24"/>
+      <path d="M-10 8 Q0 0 10 8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+    </g>
+    <!-- Apple -->
+    <g transform="translate(250, 245)">
+      <circle cx="0" cy="12" r="12" fill="#ef4444"/>
+      <path d="M0 0 Q3 -8 0 -5" fill="none stroke="#22c55e" stroke-width="2"/>
+      <ellipse cx="3" cy="-2" rx="4" ry="3" fill="#22c55e" transform="rotate(-20 3 -2)"/>
+    </g>
+    <!-- Bag logo "برکت" -->
+    <text x="200" y="360" font-family="Vazirmatn, Arial, sans-serif" font-size="28" font-weight="700" fill="#ffffff" text-anchor="middle" opacity="0.9">برکت</text>
+  </g>
+
+  <!-- ===== LEGS ===== -->
+  <!-- Left leg -->
+  <rect x="155" y="340" width="35" height="70" rx="8" fill="url(#pants-gradient)"/>
+  <!-- Right leg -->
+  <rect x="210" y="340" width="35" height="70" rx="8" fill="url(#pants-gradient)"/>
+  <!-- Left shoe -->
+  <ellipse cx="172" cy="415" rx="22" ry="10" fill="#1e293b"/>
+  <!-- Right shoe -->
+  <ellipse cx="228" cy="415" rx="22" ry="10" fill="#1e293b"/>
+
+  <!-- ===== BODY ===== -->
+  <!-- Vest/jacket -->
+  <path d="M140 200 Q140 180 160 180 L240 180 Q260 180 260 200 L260 350 Q260 360 250 360 L150 360 Q140 360 140 350 Z" fill="url(#vest-gradient)"/>
+  <!-- Vest collar -->
+  <path d="M160 180 L200 210 L240 180" fill="none" stroke="#6d28d9" stroke-width="3"/>
+  <!-- Vest buttons -->
+  <circle cx="200" cy="240" r="4" fill="#ddd6fe"/>
+  <circle cx="200" cy="270" r="4" fill="#ddd6fe"/>
+  <circle cx="200" cy="300" r="4" fill="#ddd6fe"/>
+  <!-- Shirt underneath -->
+  <rect x="180" y="185" width="40" height="80" rx="5" fill="#f0fdf4"/>
+
+  <!-- ===== LEFT ARM (holding bag) ===== -->
+  <g transform="translate(130, 200)">
+    <!-- Upper arm -->
+    <path d="M10 0 Q0 40 20 80" stroke="url(#skin-gradient)" stroke-width="28" stroke-linecap="round" fill="none"/>
+    <!-- Hand gripping bag -->
+    <circle cx="20" cy="85" r="16" fill="url(#skin-gradient)"/>
+    <!-- Fingers -->
+    <circle cx="12" cy="78" r="6" fill="#e8b88a"/>
+    <circle cx="28" cy="78" r="6" fill="#e8b88a"/>
+  </g>
+
+  <!-- ===== RIGHT ARM (waving) ===== -->
+  <g transform="translate(270, 190)">
+    <!-- Upper arm -->
+    <path d="M0 0 Q30 -20 50 -60" stroke="url(#skin-gradient)" stroke-width="26" stroke-linecap="round" fill="none"/>
+    <!-- Hand waving -->
+    <circle cx="55" cy="-65" r="16" fill="url(#skin-gradient)"/>
+    <!-- Fingers spread (waving) -->
+    <circle cx="45" cy="-78" r="5" fill="#e8b88a"/>
+    <circle cx="52" cy="-82" r="5" fill="#e8b88a"/>
+    <circle cx="60" cy="-80" r="5" fill="#e8b88a"/>
+    <circle cx="66" cy="-74" r="5" fill="#e8b88a"/>
+  </g>
+
+  <!-- ===== HEAD ===== -->
+  <g filter="url(#shadow)">
+    <!-- Head shape -->
+    <ellipse cx="200" cy="130" rx="55" ry="60" fill="url(#skin-gradient)"/>
+    
+    <!-- White hair (sides) -->
+    <path d="M148 110 Q140 80 155 65 Q170 50 190 55" fill="#e2e8f0"/>
+    <path d="M252 110 Q260 80 245 65 Q230 50 210 55" fill="#e2e8f0"/>
+    <!-- Bald top (no hair on top) -->
+    
+    <!-- Ears -->
+    <ellipse cx="145" cy="130" rx="12" ry="16" fill="#e8b88a"/>
+    <ellipse cx="145" cy="130" rx="7" ry="10" fill="#d4a076"/>
+    <ellipse cx="255" cy="130" rx="12" ry="16" fill="#e8b88a"/>
+    <ellipse cx="255" cy="130" rx="7" ry="10" fill="#d4a076"/>
+
+    <!-- Eyebrows (bushy, white) -->
+    <path d="M170 108 Q180 100 192 106" stroke="#cbd5e1" stroke-width="5" stroke-linecap="round" fill="none"/>
+    <path d="M208 106 Q220 100 230 108" stroke="#cbd5e1" stroke-width="5" stroke-linecap="round" fill="none"/>
+
+    <!-- Eyes (happy, squinting from laugh) -->
+    <path d="M175 120 Q182 114 190 120" stroke="#1e293b" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M210 120 Q218 114 225 120" stroke="#1e293b" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+    <!-- Nose -->
+    <path d="M198 128 Q200 140 205 138 Q210 136 208 128" fill="#d4a076" opacity="0.7"/>
+
+    <!-- Big laughing mouth -->
+    <path d="M175 150 Q200 175 225 150" fill="#dc2626"/>
+    <path d="M180 150 Q200 165 220 150" fill="#fca5a5"/>
+    <!-- Teeth -->
+    <rect x="188" y="150" width="8" height="8" rx="2" fill="#ffffff"/>
+    <rect x="198" y="150" width="8" height="8" rx="2" fill="#ffffff"/>
+    <rect x="208" y="150" width="8" height="8" rx="2" fill="#ffffff"/>
+    <!-- Tongue hint -->
+    <ellipse cx="200" cy="165" rx="10" ry="6" fill="#b91c1c"/>
+
+    <!-- Laugh lines -->
+    <path d="M165 140 Q160 150 165 158" stroke="#c9a076" stroke-width="1.5" fill="none" opacity="0.5"/>
+    <path d="M235 140 Q240 150 235 158" stroke="#c9a076" stroke-width="1.5" fill="none" opacity="0.5"/>
+
+    <!-- Mustache (white/grey) -->
+    <path d="M182 142 Q190 148 200 144 Q210 148 218 142" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+    <!-- Cheek blush -->
+    <circle cx="168" cy="140" r="10" fill="#f9a8d4" opacity="0.3"/>
+    <circle cx="232" cy="140" r="10" fill="#f9a8d4" opacity="0.3"/>
+  </g>
+
+  <!-- ===== HAT (kufi/prayer cap) ===== -->
+  <path d="M155 80 Q155 45 200 40 Q245 45 245 80" fill="#1e293b"/>
+  <path d="M155 80 Q200 90 245 80" fill="#0f172a"/>
+  <rect x="155" y="76" width="90" height="8" rx="4" fill="#334155"/>
+  <!-- Hat pattern -->
+  <path d="M170 60 Q175 55 180 60 Q185 65 190 60 Q195 55 200 60 Q205 65 210 60 Q215 55 220 60 Q225 65 230 60" fill="none" stroke="#fbbf24" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- ===== SPARKLES / STARS around ===== -->
+  <g fill="#fbbf24" opacity="0.8">
+    <path d="M80 100 L83 90 L86 100 L96 103 L86 106 L83 116 L80 106 L70 103 Z"/>
+    <path d="M320 80 L322 72 L324 80 L332 82 L324 84 L322 92 L320 84 L312 82 Z"/>
+    <path d="M340 200 L342 192 L344 200 L352 202 L344 204 L342 212 L340 204 L332 202 Z"/>
+    <path d="M60 220 L62 212 L64 220 L72 222 L64 224 L62 232 L60 224 L52 222 Z"/>
+  </g>
+
+  <!-- ===== HEART (warmth) ===== -->
+  <g transform="translate(310, 140)" opacity="0.7">
+    <path d="M0 10 Q0 0 10 0 Q20 0 20 10 Q20 20 10 30 Q0 20 0 10 Z" fill="#ef4444"/>
+    <path d="M5 8 Q5 4 8 4 Q11 4 11 8" fill="#ffffff" opacity="0.5"/>
+  </g>
+</svg>
