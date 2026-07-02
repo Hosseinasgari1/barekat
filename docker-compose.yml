@@ -5,15 +5,15 @@ services:
     image: postgres:15-alpine
     container_name: barekat_db
     environment:
-      - POSTGRES_DB=barekat_db
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=${DB_NAME:-barekat_db}
+      - POSTGRES_USER=${DB_USER:-postgres}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-postgres}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d barekat_db"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ${DB_NAME:-barekat_db}"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -38,9 +38,9 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DB_NAME=barekat_db
-      - DB_USER=postgres
-      - DB_PASSWORD=postgres
+      - DB_NAME=${DB_NAME:-barekat_db}
+      - DB_USER=${DB_USER:-postgres}
+      - DB_PASSWORD=${DB_PASSWORD:-postgres}
       - DB_HOST=db
       - DB_PORT=5432
       - REDIS_URL=redis://redis:6379/0
@@ -60,9 +60,9 @@ services:
     volumes:
       - ./backend:/app
     environment:
-      - DB_NAME=barekat_db
-      - DB_USER=postgres
-      - DB_PASSWORD=postgres
+      - DB_NAME=${DB_NAME:-barekat_db}
+      - DB_USER=${DB_USER:-postgres}
+      - DB_PASSWORD=${DB_PASSWORD:-postgres}
       - DB_HOST=db
       - DB_PORT=5432
       - REDIS_URL=redis://redis:6379/0
