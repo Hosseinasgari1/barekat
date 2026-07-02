@@ -12,6 +12,8 @@ import {
   useUpdateStoreMutation,
   useGetBagsQuery,
   useCreateBagMutation,
+  useGetPendingBagsQuery,
+  useApproveRejectBagMutation,
 } from './services/vendorApi';
 import {
   useGetAvailableBagsQuery,
@@ -59,6 +61,14 @@ const getCategoryEmoji = (cat?: string) => {
     case 'INGREDIENTS': return '🌾';
     default: return '📦';
   }
+};
+
+const getMediaUrl = (path: string | undefined | null) => {
+  if (!path) return '';
+  if (path.startsWith('http://') || path.startsWith('https://')) return path;
+  const apiURL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/';
+  const backendBase = apiURL.replace(/\/api\/?$/, '');
+  return `${backendBase}${path}`;
 };
 
 // ─────────────────────────────────────────────
@@ -270,8 +280,19 @@ const AppLayout = () => {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state: RootState) => state.auth);
 
+  useEffect(() => {
+    if (userInfo) {
+      api.get('users/profile/')
+        .then(r => {
+          dispatch(setUser(r.data));
+        })
+        .catch(() => {});
+    }
+  }, [dispatch]);
+
   const tabs = [
     { path: '/app/discover', icon: '🏠', label: 'خانه', activeIcon: '🏡' },
+    ...(userInfo?.role === 'ADMIN' ? [{ path: '/app/admin', icon: '🛡️', label: 'تاییدات', activeIcon: '🛡️' }] : []),
     { path: '/app/orders', icon: '📋', label: 'سفارشها', activeIcon: '📦' },
     { path: '/app/shop', icon: '🏪', label: 'فروشگاه', activeIcon: '🛍️' },
     { path: '/app/profile', icon: '👤', label: 'پروفایل', activeIcon: '👨‍💼' },
@@ -534,8 +555,12 @@ const DiscoveryPage = () => {
                 {/* Product/Store header */}
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-100 to-green-50 flex items-center justify-center text-2xl border border-emerald-100 shadow-sm flex-shrink-0">
-                      {getCategoryEmoji(bag.category)}
+                    <div className="w-12 h-12 rounded-2xl overflow-hidden border border-slate-100 bg-slate-50 flex items-center justify-center text-2xl shadow-sm flex-shrink-0">
+                      {bag.image ? (
+                        <img src={getMediaUrl(bag.image as string)} alt="Product" className="w-full h-full object-cover" />
+                      ) : (
+                        getCategoryEmoji(bag.category)
+                      )}
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
@@ -1116,6 +1141,8 @@ const CreateBagModal = ({ isOpen, onClose, onRefresh }: { isOpen: boolean; onClo
   const [lng, setLng] = useState(51.3890);
   const [showMap, setShowMap] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [expiryImageFile, setExpiryImageFile] = useState<File | null>(null);
 
   useEffect(() => {
     if (isOpen) {
@@ -1129,6 +1156,8 @@ const CreateBagModal = ({ isOpen, onClose, onRefresh }: { isOpen: boolean; onClo
       setEndTime('20:00');
       setShowMap(false);
       setErrorMsg('');
+      setImageFile(null);
+      setExpiryImageFile(null);
       if (activeAddress) {
         setLat(parseFloat(activeAddress.latitude));
         setLng(parseFloat(activeAddress.longitude));
@@ -1141,19 +1170,27 @@ const CreateBagModal = ({ isOpen, onClose, onRefresh }: { isOpen: boolean; onClo
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(); setErrorMsg('');
+    if (!imageFile || !expiryImageFile) {
+      setErrorMsg('لطفاً هم تصویر محصول و هم تصویر برچسب انقضا را بارگذاری کنید.');
+      return;
+    }
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('description', description);
+    formData.append('category', category);
+    formData.append('original_price', parseFloat(originalPrice).toFixed(2));
+    formData.append('platform_price', parseFloat(platformPrice).toFixed(2));
+    formData.append('quantity', qty.toString());
+    formData.append('pickup_start_time', startTime + ':00');
+    formData.append('pickup_end_time', endTime + ':00');
+    formData.append('image', imageFile);
+    formData.append('expiry_image', expiryImageFile);
+    if (!hasStore) {
+      formData.append('latitude', lat.toString());
+      formData.append('longitude', lng.toString());
+    }
     try {
-      await createBag({
-        name,
-        description,
-        category,
-        original_price: parseFloat(originalPrice).toFixed(2),
-        platform_price: parseFloat(platformPrice).toFixed(2),
-        quantity: qty,
-        pickup_start_time: startTime + ':00',
-        pickup_end_time: endTime + ':00',
-        latitude: !hasStore ? parseFloat(lat.toFixed(6)) : undefined,
-        longitude: !hasStore ? parseFloat(lng.toFixed(6)) : undefined,
-      }).unwrap();
+      await createBag(formData).unwrap();
       onRefresh(); onClose();
     } catch (err: any) {
       setErrorMsg(err.data?.detail || 'خطا در ثبت محصول.');
@@ -1247,6 +1284,19 @@ const CreateBagModal = ({ isOpen, onClose, onRefresh }: { isOpen: boolean; onClo
               )}
             </div>
           )}
+
+          <div className="grid grid-cols-2 gap-3 mb-4">
+            <div>
+              <label className="block text-xs font-bold text-slate-500 mb-1.5">📸 تصویر محصول</label>
+              <input type="file" required accept="image/*" onChange={e => setImageFile(e.target.files?.[0] || null)}
+                className="w-full text-xs text-slate-500 file:mr-2 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-[10px] file:font-black file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 transition cursor-pointer" />
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-slate-500 mb-1.5">🔍 برچسب انقضا</label>
+              <input type="file" required accept="image/*" onChange={e => setExpiryImageFile(e.target.files?.[0] || null)}
+                className="w-full text-xs text-slate-500 file:mr-2 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-[10px] file:font-black file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 transition cursor-pointer" />
+            </div>
+          </div>
 
           <div className="flex gap-3 pt-2">
             <button type="submit" disabled={isLoading}
@@ -1611,6 +1661,152 @@ const ShopOrCreate = () => {
 };
 
 // ─────────────────────────────────────────────
+// ADMIN PANEL PAGE
+// ─────────────────────────────────────────────
+const AdminPanelPage = () => {
+  const { data: pendingBags, isLoading, refetch } = useGetPendingBagsQuery();
+  const [approveRejectBag, { isLoading: isActioning }] = useApproveRejectBagMutation();
+  const [zoomedImage, setZoomedImage] = useState<string | null>(null);
+
+  const handleAction = async (id: number, action: 'approve' | 'reject') => {
+    try {
+      await approveRejectBag({ id, action }).unwrap();
+      refetch();
+    } catch (err: any) {
+      alert('خطا در انجام عملیات: ' + (err.data?.detail || 'خطای سرور'));
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center h-64 gap-3">
+        <div className="w-10 h-10 rounded-full border-4 border-slate-200 border-t-emerald-500 animate-spin" />
+        <span className="text-sm text-slate-500 font-semibold">در حال دریافت محصولات در انتظار تایید...</span>
+      </div>
+    );
+  }
+
+  const bagsList = pendingBags || [];
+
+  return (
+    <div className="space-y-6" dir="rtl">
+      <div className="flex items-center justify-between">
+        <h1 className="text-xl font-black text-slate-800">🛡️ پنل مدیریت و تایید محصولات</h1>
+        <span className="text-xs bg-amber-50 text-amber-700 px-3 py-1.5 rounded-full border border-amber-100 font-bold">
+          {bagsList.length} محصول در انتظار تایید
+        </span>
+      </div>
+
+      {bagsList.length === 0 ? (
+        <div className="bg-white rounded-3xl p-12 text-center shadow-sm border border-slate-100">
+          <span className="text-5xl block mb-3">🎉</span>
+          <h3 className="font-black text-slate-700">همه چیز تایید شده است!</h3>
+          <p className="text-xs text-slate-400 mt-1">هیچ محصول جدیدی در صف بررسی وجود ندارد.</p>
+        </div>
+      ) : (
+        <div className="space-y-4">
+          {bagsList.map(bag => (
+            <div key={bag.id} className="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 space-y-4">
+              {/* Product header */}
+              <div className="flex items-start justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-2xl shadow-inner flex-shrink-0">
+                    {getCategoryEmoji(bag.category)}
+                  </div>
+                  <div>
+                    <h3 className="font-black text-slate-800 text-sm">{bag.name}</h3>
+                    <p className="text-xs text-slate-400 mt-0.5 font-semibold">
+                      {bag.store 
+                        ? `🏪 فروشگاه: ${bag.store.name}` 
+                        : `👤 فروشنده حقیقی: ${bag.seller_details?.first_name || bag.seller_details?.last_name 
+                            ? `${bag.seller_details.first_name || ''} ${bag.seller_details.last_name || ''}`.trim()
+                            : 'کاربر برکت'}`}
+                    </p>
+                  </div>
+                </div>
+                <span className="text-[10px] font-bold text-slate-500 bg-slate-50 px-2.5 py-1 rounded-md">
+                  {categories.find(c => c.value === bag.category)?.label || bag.category}
+                </span>
+              </div>
+
+              {/* Product info grid */}
+              <div className="grid grid-cols-3 gap-2 bg-slate-50 rounded-2xl p-3 text-xs">
+                <div>
+                  <span className="text-[10px] text-slate-400 font-semibold block">قیمت اصلی</span>
+                  <span className="font-bold text-slate-700 line-through">{parseFloat(bag.original_price).toLocaleString()} ﷼</span>
+                </div>
+                <div>
+                  <span className="text-[10px] text-slate-400 font-semibold block">قیمت برکت</span>
+                  <span className="font-black text-emerald-600">{parseFloat(bag.platform_price).toLocaleString()} ﷼</span>
+                </div>
+                <div>
+                  <span className="text-[10px] text-slate-400 font-semibold block">موجودی / بازه</span>
+                  <span className="font-black text-amber-600">{bag.quantity} عدد • {bag.pickup_start_time.slice(0,5)}-{bag.pickup_end_time.slice(0,5)}</span>
+                </div>
+              </div>
+
+              {/* Images side by side */}
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1">
+                  <span className="text-[10px] font-bold text-slate-400">🖼️ عکس محصول:</span>
+                  <div className="relative h-28 rounded-2xl overflow-hidden border border-slate-100 bg-slate-50 cursor-zoom-in group"
+                    onClick={() => setZoomedImage(getMediaUrl(bag.image as string))}>
+                    {bag.image ? (
+                      <img src={getMediaUrl(bag.image as string)} alt="Product" className="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-xs text-slate-400">بدون تصویر</div>
+                    )}
+                  </div>
+                </div>
+                <div className="space-y-1">
+                  <span className="text-[10px] font-bold text-slate-400">🔍 برچسب انقضا / کیفیت:</span>
+                  <div className="relative h-28 rounded-2xl overflow-hidden border border-slate-100 bg-slate-50 cursor-zoom-in group"
+                    onClick={() => setZoomedImage(getMediaUrl(bag.expiry_image as string))}>
+                    {bag.expiry_image ? (
+                      <img src={getMediaUrl(bag.expiry_image as string)} alt="Expiry Label" className="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-xs text-slate-400">بدون تصویر</div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Action buttons */}
+              <div className="flex gap-3 pt-2 border-t border-slate-50">
+                <button
+                  onClick={() => handleAction(bag.id!, 'approve')}
+                  disabled={isActioning}
+                  className="flex-1 py-3 rounded-xl font-black bg-emerald-600 text-white shadow-md shadow-emerald-500/20 hover:brightness-105 active:scale-[0.98] transition-all disabled:opacity-50 text-xs"
+                >
+                  ✔️ تایید و انتشار در بازار
+                </button>
+                <button
+                  onClick={() => handleAction(bag.id!, 'reject')}
+                  disabled={isActioning}
+                  className="py-3 px-5 rounded-xl font-bold border border-red-200 text-red-600 hover:bg-red-50 active:scale-[0.98] transition-all disabled:opacity-50 text-xs"
+                >
+                  ❌ رد محصول
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Lightbox / Zoom Modal */}
+      {zoomedImage && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4" onClick={() => setZoomedImage(null)}>
+          <div className="relative max-w-lg max-h-[80vh] bg-white rounded-3xl overflow-hidden shadow-2xl p-2" onClick={e => e.stopPropagation()}>
+            <button className="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/60 text-white font-bold flex items-center justify-center z-10" onClick={() => setZoomedImage(null)}>✕</button>
+            <img src={zoomedImage} alt="Zoomed View" className="max-w-full max-h-[75vh] object-contain rounded-2xl" />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// ─────────────────────────────────────────────
 // ROOT APP
 // ─────────────────────────────────────────────
 function App() {
@@ -1628,6 +1824,7 @@ function App() {
           }
         >
           <Route path="/app/discover" element={<DiscoveryPage />} />
+          <Route path="/app/admin" element={<AdminPanelPage />} />
           <Route path="/app/orders" element={<MyOrdersPage />} />
           <Route path="/app/shop" element={<ShopOrCreate />} />
           <Route path="/app/profile" element={<ProfilePage />} />

@@ -22,6 +22,9 @@ class MagicBagSerializer(serializers.ModelSerializer):
             'category',
             'latitude',
             'longitude',
+            'image',
+            'expiry_image',
+            'approval_status',
             'original_price',
             'platform_price',
             'quantity',
@@ -30,7 +33,7 @@ class MagicBagSerializer(serializers.ModelSerializer):
             'is_active',
             'created_at'
         )
-        read_only_fields = ('id', 'store', 'seller', 'created_at')
+        read_only_fields = ('id', 'store', 'seller', 'approval_status', 'created_at')
 
 
 class AvailableMagicBagSerializer(serializers.ModelSerializer):
@@ -50,6 +53,9 @@ class AvailableMagicBagSerializer(serializers.ModelSerializer):
             'category',
             'latitude',
             'longitude',
+            'image',
+            'expiry_image',
+            'approval_status',
             'original_price',
             'platform_price',
             'quantity',

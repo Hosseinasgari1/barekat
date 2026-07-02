@@ -73,14 +73,11 @@ class VerifyOTPView(APIView):
         if role not in User.Roles.values:
             role = User.Roles.CUSTOMER
 
-        # Auto-create user if not exist, or update role
+        # Auto-create user if not exist with default/specified role
         user, created = User.objects.get_or_create(
             phone_number=normalized_phone,
             defaults={'role': role, 'is_active': True}
         )
-        if not created and role and user.role != role:
-            user.role = role
-            user.save()
 
         # Generate simplejwt tokens
         refresh = RefreshToken.for_user(user)

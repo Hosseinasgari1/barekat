@@ -68,9 +68,10 @@ class AvailableMagicBagsView(APIView):
     def get(self, request):
         from django.db.models import Q
         
-        # Bags belonging to APPROVED stores OR individual sellers
+        # Bags belonging to APPROVED stores OR individual sellers, and approved by admin
         bags = MagicBag.objects.filter(
             Q(store__status='APPROVED') | Q(store__isnull=True),
+            approval_status='APPROVED',
             is_active=True,
             quantity__gt=0
         ).select_related('store', 'seller')
@@ -115,4 +116,41 @@ class AvailableMagicBagsView(APIView):
 
         # No coordinates provided — return empty list so buyer must pick an address
         return Response([], status=status.HTTP_200_OK)
+
+
+class IsAdminUser(permissions.BasePermission):
+    """Allows access only to admin users."""
+    def has_permission(self, request, view):
+        return request.user and (request.user.role == 'ADMIN' or request.user.is_staff)
+
+
+class AdminPendingBagsListView(generics.ListAPIView):
+    """List all pending magic bags for admin approval."""
+    queryset = MagicBag.objects.filter(approval_status='PENDING')
+    serializer_class = AvailableMagicBagSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdminUser]
+    pagination_class = None
+
+
+class AdminApproveRejectBagView(APIView):
+    """Approve or reject a magic bag."""
+    permission_classes = [permissions.IsAuthenticated, IsAdminUser]
+
+    def post(self, request, pk):
+        try:
+            bag = MagicBag.objects.get(pk=pk)
+        except MagicBag.DoesNotExist:
+            return Response({"detail": "Product not found."}, status=status.HTTP_404_NOT_FOUND)
+            
+        action = request.data.get('action')
+        if action == 'approve':
+            bag.approval_status = 'APPROVED'
+            bag.save()
+            return Response({"detail": "Product approved successfully."}, status=status.HTTP_200_OK)
+        elif action == 'reject':
+            bag.approval_status = 'REJECTED'
+            bag.save()
+            return Response({"detail": "Product rejected successfully."}, status=status.HTTP_200_OK)
+        
+        return Response({"detail": "Invalid action."}, status=status.HTTP_400_BAD_REQUEST)
 

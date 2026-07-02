@@ -32,6 +32,9 @@ export interface AvailableBag {
   category: string;
   latitude?: string;
   longitude?: string;
+  image?: string;
+  expiry_image?: string;
+  approval_status?: 'PENDING' | 'APPROVED' | 'REJECTED';
   original_price: string;
   platform_price: string;
   quantity: number;

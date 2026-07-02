@@ -38,6 +38,18 @@ class MagicBag(models.Model):
     latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
 
+    image = models.FileField(upload_to='bags/', null=True, blank=True)
+    expiry_image = models.FileField(upload_to='expiry_labels/', null=True, blank=True)
+    approval_status = models.CharField(
+        max_length=20,
+        choices=[
+            ('PENDING', 'Pending'),
+            ('APPROVED', 'Approved'),
+            ('REJECTED', 'Rejected')
+        ],
+        default='PENDING'
+    )
+
     original_price = models.DecimalField(max_digits=10, decimal_places=2)
     platform_price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.IntegerField()

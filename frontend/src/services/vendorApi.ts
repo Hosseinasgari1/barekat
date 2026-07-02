@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import type { AvailableBag } from './orderApi';
 
 interface StorePayload {
   name: string;
@@ -16,6 +17,9 @@ interface MagicBagPayload {
   category?: string;
   latitude?: number;
   longitude?: number;
+  image?: string | File;
+  expiry_image?: string | File;
+  approval_status?: 'PENDING' | 'APPROVED' | 'REJECTED';
   original_price: string;
   platform_price: string;
   quantity: number;
@@ -35,12 +39,15 @@ export const vendorApi = createApi({
   reducerPath: 'vendorApi',
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_URL || 'http://localhost:8000/api/',
-    prepareHeaders: (headers) => {
+    prepareHeaders: (headers, { endpoint }) => {
       const token = localStorage.getItem('access_token');
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }
-      headers.set('Content-Type', 'application/json');
+      // Skip setting Content-Type for createBag to let browser set the multipart boundary
+      if (endpoint !== 'createBag') {
+        headers.set('Content-Type', 'application/json');
+      }
       return headers;
     },
   }),
@@ -58,11 +65,21 @@ export const vendorApi = createApi({
     getBags: builder.query<BagsResponse, void>({
       query: () => 'inventory/bags/',
     }),
-    createBag: builder.mutation<MagicBagPayload, MagicBagPayload>({
+    createBag: builder.mutation<MagicBagPayload, FormData | MagicBagPayload>({
       query: (body) => ({
         url: 'inventory/bags/',
         method: 'POST',
         body,
+      }),
+    }),
+    getPendingBags: builder.query<AvailableBag[], void>({
+      query: () => 'inventory/admin/pending/',
+    }),
+    approveRejectBag: builder.mutation<{ detail: string }, { id: number; action: 'approve' | 'reject' }>({
+      query: ({ id, action }) => ({
+        url: `inventory/admin/bags/${id}/action/`,
+        method: 'POST',
+        body: { action },
       }),
     }),
   }),
@@ -73,4 +90,6 @@ export const {
   useUpdateStoreMutation,
   useGetBagsQuery,
   useCreateBagMutation,
+  useGetPendingBagsQuery,
+  useApproveRejectBagMutation,
 } = vendorApi;
