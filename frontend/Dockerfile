@@ -9,8 +9,8 @@ RUN npm install
 
 COPY . .
 
-# Set VITE_API_URL as a real env var so Vite picks it up at build time
-ENV VITE_API_URL=http://107.150.20.134:8000/api/
+# Use a relative API path; nginx proxies /api/ to the backend (same-origin, no CORS)
+ENV VITE_API_URL=/api/
 
 RUN npm run build
 
