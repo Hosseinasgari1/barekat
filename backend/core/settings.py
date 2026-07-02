@@ -24,6 +24,15 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() == 'true'
 _allowed_hosts_env = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1')
 ALLOWED_HOSTS = [h.strip() for h in _allowed_hosts_env.split(',') if h.strip()]
 
+# Trust X-Forwarded-* headers set by the nginx reverse proxy
+USE_X_FORWARDED_HOST = True
+
+# CSRF trusted origins (must include scheme) for requests coming through nginx
+CSRF_TRUSTED_ORIGINS = [
+    f"http://{h}" for h in ALLOWED_HOSTS if h not in ('localhost', '127.0.0.1', '*')
+]
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -101,7 +110,9 @@ DATABASES = {
     'default': dj_database_url.config(
         default=default_db_url,
         conn_max_age=600,
-        ssl_require=False if DEBUG else True
+        # DB runs on the internal Docker network; SSL is not configured on the
+        # Postgres container, so requiring it would break all queries.
+        ssl_require=False
     )
 }
 
