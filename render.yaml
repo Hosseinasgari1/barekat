@@ -1,0 +1,41 @@
+databases:
+  - name: barekat-db
+    databaseName: barekat
+    user: barekat_user
+    plan: free
+
+services:
+  # 1. Django REST Backend Web Service
+  - type: web
+    name: barekat-api
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn core.wsgi:application"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: barekat-db
+          property: connectionString
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: "False"
+      - key: PYTHON_VERSION
+        value: 3.12.8
+
+  # 2. React Vite Frontend Static Site
+  - type: web
+    name: barekat-web
+    runtime: static
+    rootDir: frontend
+    buildCommand: "npm install && npm run build"
+    staticPublishPath: "./dist"
+    routes:
+      - type: rewrite
+        source: "/*"
+        destination: "/index.html"
+    envVars:
+      - key: VITE_API_URL
+        value: "https://barekat-api.onrender.com/api/"

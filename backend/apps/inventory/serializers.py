@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from inventory.models import MagicBag
+from inventory.models import MagicBag, MasterProduct
 from stores.models import Store
 from users.serializers import UserSerializer
 
@@ -23,6 +23,7 @@ class MagicBagSerializer(serializers.ModelSerializer):
             'latitude',
             'longitude',
             'image',
+            'catalog_image_url',
             'expiry_image',
             'approval_status',
             'original_price',
@@ -40,6 +41,8 @@ class AvailableMagicBagSerializer(serializers.ModelSerializer):
     store = StoreBriefSerializer(read_only=True)
     seller_details = UserSerializer(source='seller', read_only=True)
     distance = serializers.FloatField(read_only=True, required=False)
+    seller_rating = serializers.FloatField(read_only=True, required=False, allow_null=True)
+    seller_rating_count = serializers.IntegerField(read_only=True, required=False)
 
     class Meta:
         model = MagicBag
@@ -54,6 +57,7 @@ class AvailableMagicBagSerializer(serializers.ModelSerializer):
             'latitude',
             'longitude',
             'image',
+            'catalog_image_url',
             'expiry_image',
             'approval_status',
             'original_price',
@@ -61,7 +65,19 @@ class AvailableMagicBagSerializer(serializers.ModelSerializer):
             'quantity',
             'pickup_start_time',
             'pickup_end_time',
+            'is_active',
             'distance',
-            'created_at'
+            'seller_rating',
+            'seller_rating_count',
+            'created_at',
+            'updated_at',
         )
 
+
+class MasterProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MasterProduct
+        fields = (
+            'id', 'title', 'brand', 'category', 'barcode',
+            'image_url', 'unit', 'description', 'source'
+        )

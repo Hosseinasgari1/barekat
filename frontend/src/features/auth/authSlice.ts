@@ -7,7 +7,11 @@ interface UserInfo {
   first_name?: string;
   last_name?: string;
   email?: string;
+  admin_username?: string;
+  is_super_admin?: boolean;
+  admin_permissions?: string[];
 }
+
 
 interface AuthState {
   accessToken: string | null;

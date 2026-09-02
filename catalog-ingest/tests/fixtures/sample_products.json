@@ -1,0 +1,52 @@
+[
+  {
+    "id": "demo-1001",
+    "title": "شیر کم‌چرب میهن ۱ لیتر",
+    "brand": "میهن",
+    "category": "لبنیات > شیر",
+    "barcode": "6260123456789",
+    "image_url": "https://example.com/milk.jpg",
+    "unit": "1 لیتر",
+    "description": "شیر پاستوریزه کم‌چرب",
+    "url": "https://example.com/products/milk"
+  },
+  {
+    "id": "demo-1002",
+    "title": "نان باگت تازه",
+    "brand": "نانوایی محلی",
+    "category_path": "نانوایی / نان",
+    "barcode": null,
+    "image": "https://example.com/bread.jpg",
+    "weight": "400 گرم",
+    "description": "نان تازه روزانه"
+  },
+  {
+    "id": "demo-1003",
+    "title": "  روغن آفتابگردان اویلا  ۱٫۸ لیتر  ",
+    "brand_name": "اویلا",
+    "sub_category": "روغن",
+    "category": "خواربار",
+    "ean": "6260987654321",
+    "thumbnail": "https://example.com/oil.jpg",
+    "capacity": "1.8 لیتر"
+  },
+  {
+    "product_id": "demo-1004",
+    "name": "ماست سفت کاله ۹۰۰ گرم",
+    "brand": {"title": "کاله"},
+    "full_category": "لبنیات > ماست",
+    "bar_code": "6260111222333",
+    "images": [{"url": "https://example.com/yogurt.jpg"}],
+    "specs": {"unit": "گرم", "barcode": "6260111222333"}
+  },
+  {
+    "id": "demo-1005",
+    "title": "تخم‌مرغ تلاونگ ۶ عددی",
+    "brand": "تلاونگ",
+    "category": "پروتئینی | تخم‌مرغ",
+    "gtin": "6260555666777",
+    "cover": "https://example.com/eggs.jpg",
+    "amount": "6",
+    "unit": "عدد"
+  }
+]

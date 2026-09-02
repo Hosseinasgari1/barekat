@@ -39,6 +39,7 @@ class MagicBag(models.Model):
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
 
     image = models.FileField(upload_to='bags/', null=True, blank=True)
+    catalog_image_url = models.URLField(max_length=500, null=True, blank=True)
     expiry_image = models.FileField(upload_to='expiry_labels/', null=True, blank=True)
     approval_status = models.CharField(
         max_length=20,
@@ -65,4 +66,27 @@ class MagicBag(models.Model):
     def __str__(self):
         store_name = self.store.name if self.store else f"Individual ({self.seller.phone_number if self.seller else self.id})"
         return f"{self.name} (ID: {self.id}) - Store: {store_name} (Qty: {self.quantity})"
+
+
+class MasterProduct(models.Model):
+    """
+    Read-only unmanaged model mapped to the `products` table in the master_catalog database.
+    """
+    id = models.UUIDField(primary_key=True)
+    title = models.TextField()
+    brand = models.TextField(null=True, blank=True)
+    category = models.TextField()
+    barcode = models.TextField(null=True, blank=True)
+    image_url = models.TextField(null=True, blank=True)
+    unit = models.TextField(null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+    source = models.CharField(max_length=64)
+    source_product_id = models.TextField(null=True, blank=True)
+    source_url = models.TextField(null=True, blank=True)
+    created_at = models.DateTimeField()
+    updated_at = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'products'
 

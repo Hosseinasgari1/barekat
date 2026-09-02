@@ -24,13 +24,24 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() == 'true'
 _allowed_hosts_env = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1')
 ALLOWED_HOSTS = [h.strip() for h in _allowed_hosts_env.split(',') if h.strip()]
 
-# Trust X-Forwarded-* headers set by the nginx reverse proxy
-USE_X_FORWARDED_HOST = True
+# Automatically support Render's default free domain (e.g. *.onrender.com)
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME and RENDER_EXTERNAL_HOSTNAME not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
-# CSRF trusted origins (must include scheme) for requests coming through nginx
-CSRF_TRUSTED_ORIGINS = [
-    f"http://{h}" for h in ALLOWED_HOSTS if h not in ('localhost', '127.0.0.1', '*')
-]
+# Trust X-Forwarded-* headers set by reverse proxies / cloud platforms
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# CSRF trusted origins (supports both HTTPS and HTTP)
+_csrf_origins_env = os.environ.get('CSRF_TRUSTED_ORIGINS', '')
+if _csrf_origins_env:
+    CSRF_TRUSTED_ORIGINS = [o.strip() for o in _csrf_origins_env.split(',') if o.strip()]
+else:
+    CSRF_TRUSTED_ORIGINS = []
+    for h in ALLOWED_HOSTS:
+        if h not in ('localhost', '127.0.0.1', '*'):
+            CSRF_TRUSTED_ORIGINS.extend([f"https://{h}", f"http://{h}"])
 
 
 # Application definition
@@ -57,6 +68,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  # Must be placed at the top
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -113,8 +125,16 @@ DATABASES = {
         # DB runs on the internal Docker network; SSL is not configured on the
         # Postgres container, so requiring it would break all queries.
         ssl_require=False
+    ),
+    'catalog': dj_database_url.config(
+        env='CATALOG_DATABASE_URL',
+        default=f"sqlite:///{BASE_DIR}/master_catalog.sqlite3" if os.path.exists(BASE_DIR / "master_catalog.sqlite3") else default_db_url,
+        conn_max_age=600,
+        ssl_require=False
     )
 }
+
+DATABASE_ROUTERS = ['inventory.routers.CatalogRouter']
 
 
 # Password validation
@@ -153,6 +173,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'

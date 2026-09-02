@@ -4,10 +4,31 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import get_user_model
-from users.serializers import UserSerializer, RegisterSerializer
+from django.shortcuts import get_object_or_404
+from users.serializers import (
+    UserSerializer, RegisterSerializer, AdminSerializer, AdminCreateSerializer,
+    ADMIN_PERMISSION_CHOICES,
+)
 from users.otp import generate_otp, store_otp, verify_otp, send_mock_sms
 
 User = get_user_model()
+
+
+class IsAdmin(permissions.BasePermission):
+    """Allows access only to authenticated admin accounts."""
+    def has_permission(self, request, view):
+        return bool(request.user and request.user.is_authenticated and request.user.role == User.Roles.ADMIN)
+
+
+class IsSuperAdmin(permissions.BasePermission):
+    """Allows access only to the main (super) admin."""
+    def has_permission(self, request, view):
+        return bool(
+            request.user and request.user.is_authenticated
+            and request.user.role == User.Roles.ADMIN
+            and request.user.is_super_admin
+        )
+
 
 
 def normalize_phone_number(phone):
@@ -109,3 +130,99 @@ class UserProfileView(generics.RetrieveUpdateAPIView):
 
     def get_object(self):
         return self.request.user
+
+
+class AdminLoginView(APIView):
+    """Separate login for admins using username + password (no OTP)."""
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        if not username or not password:
+            return Response({'error': 'نام کاربری و رمز عبور الزامی هستند.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            user = User.objects.get(admin_username=username.strip(), role=User.Roles.ADMIN)
+        except User.DoesNotExist:
+            return Response({'error': 'نام کاربری یا رمز عبور نادرست است.'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        if not user.is_active or not user.check_password(password):
+            return Response({'error': 'نام کاربری یا رمز عبور نادرست است.'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        refresh = RefreshToken.for_user(user)
+        return Response({
+            'access': str(refresh.access_token),
+            'refresh': str(refresh),
+            'user': {
+                'phone_number': user.phone_number,
+                'role': user.role,
+                'admin_username': user.admin_username,
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+                'is_super_admin': user.is_super_admin,
+                'admin_permissions': user.admin_permissions,
+            }
+        }, status=status.HTTP_200_OK)
+
+
+class AdminPermissionsView(APIView):
+    """Returns the list of assignable admin permissions."""
+    permission_classes = (permissions.IsAuthenticated, IsSuperAdmin)
+
+    def get(self, request):
+        return Response({'permissions': ADMIN_PERMISSION_CHOICES}, status=status.HTTP_200_OK)
+
+
+class AdminManagementView(APIView):
+    """Super admin lists all sub-admins or creates a new one."""
+    permission_classes = (permissions.IsAuthenticated, IsSuperAdmin)
+
+    def get(self, request):
+        admins = User.objects.filter(role=User.Roles.ADMIN).order_by('-created_at')
+        serializer = AdminSerializer(admins, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        serializer = AdminCreateSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        admin = serializer.save()
+        return Response(AdminSerializer(admin).data, status=status.HTTP_201_CREATED)
+
+
+class AdminDetailView(APIView):
+    """Super admin updates permissions or deletes a sub-admin."""
+    permission_classes = (permissions.IsAuthenticated, IsSuperAdmin)
+
+    def _get_admin(self, pk):
+        return get_object_or_404(User, phone_number=pk, role=User.Roles.ADMIN)
+
+    def patch(self, request, pk):
+        admin = self._get_admin(pk)
+        if admin.is_super_admin:
+            return Response({'error': 'نمی‌توانید مدیر اصلی را تغییر دهید.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        perms = request.data.get('admin_permissions')
+        if perms is not None:
+            invalid = [p for p in perms if p not in ADMIN_PERMISSION_CHOICES]
+            if invalid:
+                return Response({'error': f'دسترسی نامعتبر: {invalid}'}, status=status.HTTP_400_BAD_REQUEST)
+            admin.admin_permissions = perms
+
+        if 'is_active' in request.data:
+            admin.is_active = bool(request.data.get('is_active'))
+
+        password = request.data.get('password')
+        if password:
+            admin.set_password(password)
+
+        admin.save()
+        return Response(AdminSerializer(admin).data, status=status.HTTP_200_OK)
+
+    def delete(self, request, pk):
+        admin = self._get_admin(pk)
+        if admin.is_super_admin:
+            return Response({'error': 'نمی‌توانید مدیر اصلی را حذف کنید.'}, status=status.HTTP_400_BAD_REQUEST)
+        admin.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+

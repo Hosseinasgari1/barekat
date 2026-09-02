@@ -51,9 +51,11 @@ export const vendorApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ['AdminBags', 'MyBags', 'MyStore'],
   endpoints: (builder) => ({
     getMyStore: builder.query<StorePayload, void>({
       query: () => 'stores/my-store/',
+      providesTags: ['MyStore'],
     }),
     updateStore: builder.mutation<StorePayload, StorePayload>({
       query: (body) => ({
@@ -61,9 +63,11 @@ export const vendorApi = createApi({
         method: 'POST',
         body,
       }),
+      invalidatesTags: ['MyStore'],
     }),
     getBags: builder.query<BagsResponse, void>({
       query: () => 'inventory/bags/',
+      providesTags: ['MyBags'],
     }),
     createBag: builder.mutation<MagicBagPayload, FormData | MagicBagPayload>({
       query: (body) => ({
@@ -71,16 +75,51 @@ export const vendorApi = createApi({
         method: 'POST',
         body,
       }),
+      invalidatesTags: ['MyBags'],
     }),
     getPendingBags: builder.query<AvailableBag[], void>({
       query: () => 'inventory/admin/pending/',
+      providesTags: ['AdminBags'],
     }),
-    approveRejectBag: builder.mutation<{ detail: string }, { id: number; action: 'approve' | 'reject' }>({
-      query: ({ id, action }) => ({
+    getAdminBags: builder.query<AvailableBag[], 'PENDING' | 'APPROVED' | 'REJECTED' | 'ALL' | void>({
+      query: (status = 'ALL') => {
+        const params = status && status !== 'ALL' ? `?status=${status}` : '';
+        return `inventory/admin/bags/${params}`;
+      },
+      providesTags: ['AdminBags'],
+    }),
+    approveRejectBag: builder.mutation<
+      { detail: string; quantity?: number },
+      {
+        id: number;
+        action: 'approve' | 'reject' | 'reopen' | 'activate' | 'deactivate' | 'set_quantity';
+        quantity?: number;
+      }
+    >({
+      query: ({ id, action, quantity }) => ({
         url: `inventory/admin/bags/${id}/action/`,
         method: 'POST',
-        body: { action },
+        body: quantity !== undefined ? { action, quantity } : { action },
       }),
+      invalidatesTags: ['AdminBags'],
+    }),
+    searchCatalog: builder.query<any[], string>({
+      query: (q) => `inventory/catalog/search/?q=${encodeURIComponent(q)}`,
+    }),
+    getCatalogSources: builder.query<string[], void>({
+      query: () => `inventory/catalog/sources/`,
+    }),
+    getCatalogCategories: builder.query<string[], string | void>({
+      query: (source) => `inventory/catalog/categories/${source ? `?source=${source}` : ''}`,
+    }),
+    getCatalogProducts: builder.query<{ count: number, results: any[] }, { source?: string, category?: string, page?: number }>({
+      query: (params) => {
+        let qs = [];
+        if (params.source) qs.push(`source=${encodeURIComponent(params.source)}`);
+        if (params.category) qs.push(`category=${encodeURIComponent(params.category)}`);
+        if (params.page) qs.push(`page=${params.page}`);
+        return `inventory/catalog/products/?${qs.join('&')}`;
+      }
     }),
   }),
 });
@@ -91,5 +130,10 @@ export const {
   useGetBagsQuery,
   useCreateBagMutation,
   useGetPendingBagsQuery,
+  useGetAdminBagsQuery,
   useApproveRejectBagMutation,
+  useSearchCatalogQuery,
+  useGetCatalogSourcesQuery,
+  useGetCatalogCategoriesQuery,
+  useGetCatalogProductsQuery,
 } = vendorApi;

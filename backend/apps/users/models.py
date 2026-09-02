@@ -36,12 +36,21 @@ class User(AbstractUser):
         OTHER = 'OTHER', 'Other'
 
     username = None  # Disable the default username field
-    phone_number = models.CharField(max_length=15, unique=True, primary_key=True)
+    phone_number = models.CharField(max_length=150, unique=True, primary_key=True)
     role = models.CharField(max_length=10, choices=Roles.choices, default=Roles.CUSTOMER)
-    
+
+    # Admin management fields (used only when role == ADMIN)
+    # `admin_username` is the credential admins log in with (separate from phone/OTP users).
+    admin_username = models.CharField(max_length=150, unique=True, null=True, blank=True)
+    # The main admin who can create/manage other admins.
+    is_super_admin = models.BooleanField(default=False)
+    # List of permission strings granted to this admin, e.g. ["approve_products"].
+    admin_permissions = models.JSONField(default=list, blank=True)
+
     # Custom attributes
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
 
     objects = UserManager()
 

@@ -18,6 +18,22 @@ interface StoreBrief {
   longitude: number;
 }
 
+export interface Review {
+  id: number;
+  rating: number;
+  comment: string;
+  customer: {
+    display_name: string;
+  };
+  created_at: string;
+}
+
+export interface SellerReviewsResponse {
+  average_rating: number | null;
+  review_count: number;
+  reviews: Review[];
+}
+
 export interface AvailableBag {
   id: number;
   store: StoreBrief | null;
@@ -40,8 +56,12 @@ export interface AvailableBag {
   quantity: number;
   pickup_start_time: string;
   pickup_end_time: string;
+  is_active?: boolean;
   distance?: number;
+  seller_rating?: number | null;
+  seller_rating_count?: number;
   created_at: string;
+  updated_at?: string;
 }
 
 export interface OrderDetail {
@@ -68,6 +88,7 @@ export interface OrderDetail {
   total_price: string;
   status: 'PENDING_PAYMENT' | 'PAID' | 'PICKED_UP' | 'CANCELLED';
   pickup_code: string;
+  my_review?: Review | null;
   created_at: string;
   updated_at: string;
 }
@@ -80,6 +101,12 @@ interface CreateOrderRequest {
 interface VerifyPickupRequest {
   orderId: number;
   pickup_code: string;
+}
+
+interface SubmitReviewRequest {
+  orderId: number;
+  rating: number;
+  comment?: string;
 }
 
 export const orderApi = createApi({
@@ -95,9 +122,9 @@ export const orderApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Orders', 'Bags', 'Addresses'],
+  tagTypes: ['Orders', 'Bags', 'Addresses', 'Reviews'],
   endpoints: (builder) => ({
-    getAvailableBags: builder.query<AvailableBag[], { latitude?: number; longitude?: number; category?: string } | void>({
+    getAvailableBags: builder.query<AvailableBag[], { latitude?: number; longitude?: number; category?: string; sort?: 'distance' | 'rating' } | void>({
       query: (params) => {
         let url = 'inventory/available-bags/';
         const queryParts: string[] = [];
@@ -108,6 +135,9 @@ export const orderApi = createApi({
           }
           if (params.category) {
             queryParts.push(`category=${params.category}`);
+          }
+          if (params.sort) {
+            queryParts.push(`sort=${params.sort}`);
           }
         }
         if (queryParts.length > 0) {
@@ -155,7 +185,23 @@ export const orderApi = createApi({
       }),
       invalidatesTags: ['Orders'],
     }),
+    submitReview: builder.mutation<Review, SubmitReviewRequest>({
+      query: ({ orderId, rating, comment }) => ({
+        url: `orders/${orderId}/review/`,
+        method: 'POST',
+        body: { rating, comment: comment ?? '' },
+      }),
+      invalidatesTags: ['Orders', 'Bags', 'Reviews'],
+    }),
+    getSellerReviews: builder.query<SellerReviewsResponse, { storeId?: number; sellerId?: number }>({
+      query: ({ storeId, sellerId }) => {
+        const params = storeId ? `store_id=${storeId}` : `seller_id=${sellerId}`;
+        return `orders/seller-reviews/?${params}`;
+      },
+      providesTags: ['Reviews'],
+    }),
     // ── Address endpoints ──
+
     getMyAddresses: builder.query<UserAddress[], void>({
       query: () => 'stores/addresses/',
       // DRF global pagination wraps results — extract the array
@@ -189,9 +235,12 @@ export const {
   useApproveOrderMutation,
   useRejectOrderMutation,
   useVerifyPickupMutation,
+  useSubmitReviewMutation,
+  useGetSellerReviewsQuery,
   useGetMyAddressesQuery,
   useDeleteAddressMutation,
   useSetActiveAddressMutation,
+
 } = orderApi;
 
 export const AvailableBag = {};

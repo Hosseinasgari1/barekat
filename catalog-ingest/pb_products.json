@@ -1,0 +1,335 @@
+{
+  "items": [
+    {
+      "id": 4484874,
+      "title": "شیر پرچرب مدت دار کاله 1 لیتری",
+      "price": 136000,
+      "images": [
+        {
+          "thumb": "https://static.snapp.express/product-hub/84e32cbb_6720e170ed3c6.jpg",
+          "main": "https://static.snapp.express/product-hub/84e32cbb_6720e170ed3c6.jpg",
+          "position": 15001,
+          "type": "EXPRESS"
+        },
+        {
+          "thumb": "https://static.snapp.express/product-hub/3cc07e2a_6720e170efac4.jpg",
+          "main": "https://static.snapp.express/product-hub/3cc07e2a_6720e170efac4.jpg",
+          "position": 15002,
+          "type": "EXPRESS"
+        }
+      ],
+      "discount": 0,
+      "discountRatio": null,
+      "subcategory_slug": "milk",
+      "badges": [
+        {
+          "name": "کالابرگ",
+          "icon": "",
+          "description": "این کالا مشمول کالابرگ الکترونیکی می‌شود.",
+          "active": true,
+          "id": 114,
+          "type": "BEST_PRICE",
+          "priority": 127
+        }
+      ]
+    },
+    {
+      "id": 8825094,
+      "title": "پرو شیر وانیلی مدت دار کاله پرو 330 میلی لیتری",
+      "price": 159000,
+      "images": [
+        {
+          "main": "https://static.snapp.express/product-hub/db61957c_83366f2d_6260161551047.jpg",
+          "thumb": "https://static.snapp.express/product-hub/db61957c_83366f2d_6260161551047.jpg",
+          "type": "EXPRESS",
+          "position": 1
+        },
+        {
+          "main": "https://static.snapp.express/product-hub/c86c005d_6260161551047.png",
+          "thumb": "https://static.snapp.express/product-hub/c86c005d_6260161551047.png",
+          "type": "EXPRESS",
+          "position": 2
+        }
+      ],
+      "discount": 0,
+      "discountRatio": null,
+      "subcategory_slug": "milk",
+      "badges": [
+        {
+          "id": 114,
+          "name": "کالابرگ",
+          "description": "این کالا مشمول کالابرگ الکترونیکی می‌شود.",
+          "icon": "",
+          "active": true,
+          "type": "BEST_PRICE",
+          "priority": 127
+        }
+      ]
+    },
+    {
+      "id": 4087600,
+      "title": "شیر پرچرب روزانه 1 لیتری",
+      "price": 149000,
+      "images": [
+        {
+          "main": "https://static.snapp.express/product-hub/8f2714c8_6720ee54b4ad7.jpg",
+          "thumb": "https://static.snapp.express/product-hub/8f2714c8_6720ee54b4ad7.jpg",
+          "type": "EXPRESS",
+          "position": 15001
+        }
+      ],
+      "discount": 0,
+      "discountRatio": null,
+      "subcategory_slug": "milk",
+      "badges": [
+        {
+          "id": 114,
+          "name": "کالابرگ",
+          "description": "این کالا مشمول کالابرگ الکترونیکی می‌شود.",
+          "icon": "",
+          "active": true,
+          "type": "BEST_PRICE",
+          "priority": 127
+        }
+      ]
+    },
+    {
+      "id": 4088026,
+      "title": "شیر قهوه موکا کم چرب تازه مزرعه ماهشام 220 میلی لیتری",
+      "price": 66400,
+      "images": [
+        {
+          "thumb": "https://static.snapp.express/product-hub/55071966_66f97b7eb3b1d.jpg",
+          "main": "https://static.snapp.express/product-hub/55071966_66f97b7eb3b1d.jpg",
+          "position": 15001,
+          "type": "EXPRESS"
+        }
+      ],
+      "discount": 0,
+      "discountRatio": null,
+      "subcategory_slug": "milk",
+      "badges": [
+        {
+          "name": "کالابرگ",
+          "icon": "",
+          "description": "این کالا مشمول کالابرگ الکترونیکی می‌شود.",
+          "active": true,
+          "id": 114,
+          "type": "BEST_PRICE",
+          "priority": 127
+        }
+      ]
+    },
+    {
+      "id": 4088050,
+      "title": "شیر موز نیم چرب مدت دار عالیس 200 میلی لیتری",
+      "price": 51800,
+      "images": [
+        {
+          "thumb": "https://static.snapp.express/product-hub/cb17c725_6720f077b3e03.jpg",
+          "main": "https://static.snapp.express/product-hub/cb17c725_6720f077b3e03.jpg",
+          "position": 15001,
+          "type": "EXPRESS"
+        },
+        {
+          "thumb": "https://static.snapp.express/product-hub/2687f5d7_6720f077b6084.jpg",
+          "main": "https://static.snapp.express/product-hub/2687f5d7_6720f077b6084.jpg",
+          "position": 15002,
+          "type": "EXPRESS"
+        },
+        {
+          "thumb": "https://static.snapp.express/product-hub/dffc266e_6720f077b8248.jpg",
+          "main": "https://static.snapp.express/product-hub/dffc266e_6720f077b8248.jpg",
+          "position": 15003,
+          "type": "EXPRESS"
+        }
+      ],
+      "discount": 0,
+      "discountRatio": null,
+      "subcategory_slug": "milk",
+      "badges": [
+        {
+          "name": "کالابرگ",
+          "icon": "",
+          "description": "این کالا مشمول کالابرگ الکترونیکی می‌شود.",
+          "active": true,
+          "id": 114,
+          "type": "BEST_PRICE",
+          "priority": 127
+        }
+      ]
+    },
+    {
+      "id": 9703920,
+      "title": "شیر کم چرب تازه مزرعه ماهشام 945 میلی لیتری",
+      "price": 138500,
+      "images": [
+        {
+          "main": "https://static.snapp.express/product-hub/ba611b3c_670293a47d125.jpg",
+          "thumb": "https://static.snapp.express/product-hub/ba611b3c_670293a47d125.jpg",
+          "type": "EXPRESS",
+          "position": 1
+        }
+      ],
+      "discount": 0,
+      "discountRatio": null,
+      "subcategory_slug": "milk",
+      "badges": [
+        {
+          "id": 114,
+          "name": "کالابرگ",
+          "description": "این کالا مشمول کالابرگ الکترونیکی می‌شود.",
+          "icon": "",
+          "active": true,
+          "type": "BEST_PRICE",
+          "priority": 127
+        }
+      ]
+    },
+    {
+      "id": 9704459,
+      "title": "شیر پرچرب تازه مزرعه ماهشام 945 میلی لیتری",
+      "price": 161000,
+      "images": [
+        {
+          "main": "https://static.snapp.express/product-hub/b075d1fe_66f97b7ee84b6.jpg",
+          "thumb": "https://static.snapp.express/product-hub/b075d1fe_66f97b7ee84b6.jpg",
+          "type": "EXPRESS",
+          "position": 15001
+        }
+      ],
+      "discount": 8050,
+      "discountRatio": 5.0,
+      "subcategory_slug": "milk",
+      "badges": [
+        {
+          "id": 114,
+          "name": "کالابرگ",
+          "description": "این کالا مشمول کالابرگ الکترونیکی می‌شود.",
+          "icon": "",
+          "active": true,
+          "type": "BEST_PRICE",
+          "priority": 127
+        }
+      ]
+    },
+    {
+      "id": 4086978,
+      "title": "شیر کم چرب مدت دار حاوی ویتامین D3 میهن 200 میلی لیتری",
+      "price": 41900,
+      "images": [
+        {
+          "thumb": "https://static.snapp.express/product-hub/7cdf2c93_6720e706cca25.jpg",
+          "main": "https://static.snapp.express/product-hub/7cdf2c93_6720e706cca25.jpg",
+          "position": 15001,
+          "type": "EXPRESS"
+        },
+        {
+          "thumb": "https://static.snapp.express/product-hub/100bca00_6720e706ce51f.jpg",
+          "main": "https://static.snapp.express/product-hub/100bca00_6720e706ce51f.jpg",
+          "position": 15002,
+          "type": "EXPRESS"
+        },
+        {
+          "thumb": "https://static.snapp.express/product-hub/aca72534_6720e706d0f73.jpg",
+          "main": "https://static.snapp.express/product-hub/aca72534_6720e706d0f73.jpg",
+          "position": 15003,
+          "type": "EXPRESS"
+        }
+      ],
+      "discount": 0,
+      "discountRatio": null,
+      "subcategory_slug": "milk",
+      "badges": [
+        {
+          "name": "کالابرگ",
+          "icon": "",
+          "description": "این کالا مشمول کالابرگ الکترونیکی می‌شود.",
+          "active": true,
+          "id": 114,
+          "type": "BEST_PRICE",
+          "priority": 127
+        }
+      ]
+    },
+    {
+      "id": 4087157,
+      "title": "شیر نیم چرب مدت دار پگاه 1.5 لیتری",
+      "price": 181000,
+      "images": [
+        {
+          "thumb": "https://static.snapp.express/product-hub/b3d4847f_6720d447967af.jpg",
+          "main": "https://static.snapp.express/product-hub/b3d4847f_6720d447967af.jpg",
+          "position": 15001,
+          "type": "EXPRESS"
+        },
+        {
+          "thumb": "https://static.snapp.express/product-hub/5e7be6e0_6720d44797f56.jpg",
+          "main": "https://static.snapp.express/product-hub/5e7be6e0_6720d44797f56.jpg",
+          "position": 15002,
+          "type": "EXPRESS"
+        }
+      ],
+      "discount": 0,
+      "discountRatio": null,
+      "subcategory_slug": "milk",
+      "badges": [
+        {
+          "name": "کالابرگ",
+          "icon": "",
+          "description": "این کالا مشمول کالابرگ الکترونیکی می‌شود.",
+          "active": true,
+          "id": 114,
+          "type": "BEST_PRICE",
+          "priority": 127
+        }
+      ]
+    },
+    {
+      "id": 4087163,
+      "title": "شیر نیم چرب مدت دار حاوی ویتامین D و کلسیم پگاه 1.5 لیتری",
+      "price": 185000,
+      "images": [
+        {
+          "thumb": "https://static.snapp.express/product-hub/ba50e0f3_6720d4558adbe.jpg",
+          "main": "https://static.snapp.express/product-hub/ba50e0f3_6720d4558adbe.jpg",
+          "position": 15001,
+          "type": "EXPRESS"
+        },
+        {
+          "thumb": "https://static.snapp.express/product-hub/37b7b7b1_6720d4558c8ab.jpg",
+          "main": "https://static.snapp.express/product-hub/37b7b7b1_6720d4558c8ab.jpg",
+          "position": 15002,
+          "type": "EXPRESS"
+        },
+        {
+          "thumb": "https://static.snapp.express/product-hub/4f9ac281_6720d4558f332.jpg",
+          "main": "https://static.snapp.express/product-hub/4f9ac281_6720d4558f332.jpg",
+          "position": 15003,
+          "type": "EXPRESS"
+        }
+      ],
+      "discount": 0,
+      "discountRatio": null,
+      "subcategory_slug": "milk",
+      "badges": [
+        {
+          "name": "کالابرگ",
+          "icon": "",
+          "description": "این کالا مشمول کالابرگ الکترونیکی می‌شود.",
+          "active": true,
+          "id": 114,
+          "type": "BEST_PRICE",
+          "priority": 127
+        }
+      ]
+    }
+  ],
+  "total": 262,
+  "status": true,
+  "code": 200,
+  "pagination": {
+    "page": 0,
+    "size": 10
+  }
+}

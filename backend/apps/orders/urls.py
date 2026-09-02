@@ -5,15 +5,18 @@ from orders.views import (
     ApproveOrderView,
     RejectOrderView,
     VerifyPickupView,
-    VendorOrdersView
+    VendorOrdersView,
+    SubmitReviewView,
+    SellerReviewsView,
 )
 
 urlpatterns = [
     path('', OrderCreateView.as_view(), name='order_create'),
     path('my-orders/', CustomerOrdersView.as_view(), name='customer_orders'),
     path('vendor/', VendorOrdersView.as_view(), name='vendor_orders'),
+    path('seller-reviews/', SellerReviewsView.as_view(), name='seller_reviews'),
     path('<int:pk>/approve/', ApproveOrderView.as_view(), name='order_approve'),
     path('<int:pk>/reject/', RejectOrderView.as_view(), name='order_reject'),
     path('<int:pk>/verify-pickup/', VerifyPickupView.as_view(), name='order_verify_pickup'),
+    path('<int:pk>/review/', SubmitReviewView.as_view(), name='order_review'),
 ]
-

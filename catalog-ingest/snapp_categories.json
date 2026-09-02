@@ -1,0 +1,975 @@
+[
+  {
+    "id": [
+      99999999
+    ],
+    "title": "محصولات کالابرگی",
+    "slug": "kalabarg"
+  },
+  {
+    "id": 731224,
+    "title": "شیر",
+    "slug": "milk",
+    "parent": "محصولات کالابرگی"
+  },
+  {
+    "id": 731225,
+    "title": "پنیر آشپزی",
+    "slug": "pizza-cheese",
+    "parent": "محصولات کالابرگی"
+  },
+  {
+    "id": 731226,
+    "title": "پنیر صبحانه",
+    "slug": "cheese",
+    "parent": "محصولات کالابرگی"
+  },
+  {
+    "id": 731227,
+    "title": "ماست",
+    "slug": "yogurt",
+    "parent": "محصولات کالابرگی"
+  },
+  {
+    "id": 731244,
+    "title": "قندو شکر و نبات",
+    "slug": "sugar",
+    "parent": "محصولات کالابرگی"
+  },
+  {
+    "id": 731245,
+    "title": "ماکارونی و لازانیا و رشته",
+    "slug": "pasta-spaghetti",
+    "parent": "محصولات کالابرگی"
+  },
+  {
+    "id": 731247,
+    "title": "برنج",
+    "slug": "rice",
+    "parent": "محصولات کالابرگی"
+  },
+  {
+    "id": 731249,
+    "title": "روغن پخت و پز و سالاد",
+    "slug": "cooking-salad-oil",
+    "parent": "محصولات کالابرگی"
+  },
+  {
+    "id": 731250,
+    "title": "روغن سرخ کردنی",
+    "slug": "frying-oil",
+    "parent": "محصولات کالابرگی"
+  },
+  {
+    "id": 731251,
+    "title": "روغن زیتون",
+    "slug": "olive-oil",
+    "parent": "محصولات کالابرگی"
+  },
+  {
+    "id": 731252,
+    "title": "حبوبات و سویا",
+    "slug": "legumes-soy",
+    "parent": "محصولات کالابرگی"
+  },
+  {
+    "id": 731262,
+    "title": "مواد غذایی کودک",
+    "slug": "baby-food",
+    "parent": "محصولات کالابرگی"
+  },
+  {
+    "id": 731278,
+    "title": "سبزیجات و صیفی جات تازه",
+    "slug": "vegetables",
+    "parent": "محصولات کالابرگی"
+  },
+  {
+    "id": 731279,
+    "title": "میوه تازه",
+    "slug": "fruit",
+    "parent": "محصولات کالابرگی"
+  },
+  {
+    "id": 731292,
+    "title": "کنسرو سبزیجات و حبوبات",
+    "slug": "canned-vegetables",
+    "parent": "محصولات کالابرگی"
+  },
+  {
+    "id": 731295,
+    "title": "تخم مرغ و ماکیان",
+    "slug": "egg",
+    "parent": "محصولات کالابرگی"
+  },
+  {
+    "id": 731296,
+    "title": "گوشت قرمز",
+    "slug": "meat",
+    "parent": "محصولات کالابرگی"
+  },
+  {
+    "id": 731297,
+    "title": "مرغ",
+    "slug": "chicken",
+    "parent": "محصولات کالابرگی"
+  },
+  {
+    "id": 731299,
+    "title": "ماهی و میگو",
+    "slug": "fish-shrimp",
+    "parent": "محصولات کالابرگی"
+  },
+  {
+    "id": 731300,
+    "title": "سایر گوشت ها",
+    "slug": "other-meats",
+    "parent": "محصولات کالابرگی"
+  },
+  {
+    "id": 731306,
+    "title": "قهوه و هات چاکلت",
+    "slug": "coffee",
+    "parent": "محصولات کالابرگی"
+  },
+  {
+    "id": 731313,
+    "title": "خرما",
+    "slug": "date",
+    "parent": "محصولات کالابرگی"
+  },
+  {
+    "id": [
+      731205
+    ],
+    "title": "لبنیات و بستنی",
+    "slug": "dairy"
+  },
+  {
+    "id": 731224,
+    "title": "شیر",
+    "slug": "milk",
+    "parent": "لبنیات و بستنی"
+  },
+  {
+    "id": 731225,
+    "title": "پنیر آشپزی",
+    "slug": "pizza-cheese",
+    "parent": "لبنیات و بستنی"
+  },
+  {
+    "id": 731226,
+    "title": "پنیر صبحانه",
+    "slug": "cheese",
+    "parent": "لبنیات و بستنی"
+  },
+  {
+    "id": 731227,
+    "title": "ماست",
+    "slug": "yogurt",
+    "parent": "لبنیات و بستنی"
+  },
+  {
+    "id": 731228,
+    "title": "دوغ",
+    "slug": "doogh",
+    "parent": "لبنیات و بستنی"
+  },
+  {
+    "id": 731229,
+    "title": "کره",
+    "slug": "butter",
+    "parent": "لبنیات و بستنی"
+  },
+  {
+    "id": 731230,
+    "title": "خامه",
+    "slug": "cream",
+    "parent": "لبنیات و بستنی"
+  },
+  {
+    "id": 731231,
+    "title": "کشک",
+    "slug": "whey",
+    "parent": "لبنیات و بستنی"
+  },
+  {
+    "id": 731232,
+    "title": "بستنی و فالوده",
+    "slug": "ice-cream",
+    "parent": "لبنیات و بستنی"
+  },
+  {
+    "id": 731544,
+    "title": "لبنیات گیاهی",
+    "slug": "plant-based-dairy",
+    "parent": "لبنیات و بستنی"
+  },
+  {
+    "id": [
+      731206
+    ],
+    "title": "تنقلات",
+    "slug": "junk-food"
+  },
+  {
+    "id": 731233,
+    "title": "شکلات و آبنبات و تافی",
+    "slug": "chocolate-candies-toffee",
+    "parent": "تنقلات"
+  },
+  {
+    "id": 731234,
+    "title": "کیک و کلوچه",
+    "slug": "cakes-cookies",
+    "parent": "تنقلات"
+  },
+  {
+    "id": 731235,
+    "title": "بیسکویت و ویفر",
+    "slug": "biscuits-wafers",
+    "parent": "تنقلات"
+  },
+  {
+    "id": 731236,
+    "title": "پفک و اسنک",
+    "slug": "snacks",
+    "parent": "تنقلات"
+  },
+  {
+    "id": 731237,
+    "title": "چیپس",
+    "slug": "chips",
+    "parent": "تنقلات"
+  },
+  {
+    "id": 731238,
+    "title": "پاپ کورن و گندمک",
+    "slug": "popcorn",
+    "parent": "تنقلات"
+  },
+  {
+    "id": 731239,
+    "title": "آلوچه و لواشک",
+    "slug": "fruit-roll",
+    "parent": "تنقلات"
+  },
+  {
+    "id": 731240,
+    "title": "پاستیل و مارشمالو",
+    "slug": "pastilles-marshmallows",
+    "parent": "تنقلات"
+  },
+  {
+    "id": 731241,
+    "title": "آدامس و خوشبوکننده دهان",
+    "slug": "gum-breath-freshener",
+    "parent": "تنقلات"
+  },
+  {
+    "id": 731242,
+    "title": "آجیل تک و مغز آجیل",
+    "slug": "nuts",
+    "parent": "تنقلات"
+  },
+  {
+    "id": 731243,
+    "title": "بار و تنقلات مغذی",
+    "slug": "bar-nutritious-snacks",
+    "parent": "تنقلات"
+  },
+  {
+    "id": [
+      731215
+    ],
+    "title": "نوشیدنی",
+    "slug": "beverages"
+  },
+  {
+    "id": 731301,
+    "title": "آب معدنی، طعم دار و گازدار",
+    "slug": "water",
+    "parent": "نوشیدنی"
+  },
+  {
+    "id": 731302,
+    "title": "ماءالشعیر",
+    "slug": "beer",
+    "parent": "نوشیدنی"
+  },
+  {
+    "id": 731303,
+    "title": "آبمیوه بدون گاز",
+    "slug": "juice",
+    "parent": "نوشیدنی"
+  },
+  {
+    "id": 731304,
+    "title": "چای سیاه",
+    "slug": "black-tea",
+    "parent": "نوشیدنی"
+  },
+  {
+    "id": 731305,
+    "title": "چای سبز و دمنوش",
+    "slug": "green-herbal-tea",
+    "parent": "نوشیدنی"
+  },
+  {
+    "id": 731306,
+    "title": "قهوه و هات چاکلت",
+    "slug": "coffee",
+    "parent": "نوشیدنی"
+  },
+  {
+    "id": 731307,
+    "title": "نوشیدنی انرژی زا",
+    "slug": "energy-drink",
+    "parent": "نوشیدنی"
+  },
+  {
+    "id": 731308,
+    "title": "نوشابه",
+    "slug": "soft-drink",
+    "parent": "نوشیدنی"
+  },
+  {
+    "id": 731309,
+    "title": "شربت",
+    "slug": "syrup",
+    "parent": "نوشیدنی"
+  },
+  {
+    "id": 731310,
+    "title": "عرقیجات",
+    "slug": "herbal-distillates",
+    "parent": "نوشیدنی"
+  },
+  {
+    "id": 15000009,
+    "title": "آبمیوه گازدار",
+    "slug": "carbonated-juice",
+    "parent": "نوشیدنی"
+  },
+  {
+    "id": [
+      731207
+    ],
+    "title": "خواربار و نان",
+    "slug": "groceries-bread"
+  },
+  {
+    "id": 731244,
+    "title": "قندو شکر و نبات",
+    "slug": "sugar",
+    "parent": "خواربار و نان"
+  },
+  {
+    "id": 731245,
+    "title": "ماکارونی و لازانیا و رشته",
+    "slug": "pasta-spaghetti",
+    "parent": "خواربار و نان"
+  },
+  {
+    "id": 731246,
+    "title": "نان",
+    "slug": "bread",
+    "parent": "خواربار و نان"
+  },
+  {
+    "id": 731247,
+    "title": "برنج",
+    "slug": "rice",
+    "parent": "خواربار و نان"
+  },
+  {
+    "id": 731248,
+    "title": "رب",
+    "slug": "paste",
+    "parent": "خواربار و نان"
+  },
+  {
+    "id": 731249,
+    "title": "روغن پخت و پز و سالاد",
+    "slug": "cooking-salad-oil",
+    "parent": "خواربار و نان"
+  },
+  {
+    "id": 731250,
+    "title": "روغن سرخ کردنی",
+    "slug": "frying-oil",
+    "parent": "خواربار و نان"
+  },
+  {
+    "id": 731251,
+    "title": "روغن زیتون",
+    "slug": "olive-oil",
+    "parent": "خواربار و نان"
+  },
+  {
+    "id": 731252,
+    "title": "حبوبات و سویا",
+    "slug": "legumes-soy",
+    "parent": "خواربار و نان"
+  },
+  {
+    "id": 731253,
+    "title": "غلات",
+    "slug": "cereal",
+    "parent": "خواربار و نان"
+  },
+  {
+    "id": 731254,
+    "title": "آرد و پودر سوخاری",
+    "slug": "flour-breadcrumbs",
+    "parent": "خواربار و نان"
+  },
+  {
+    "id": [
+      731211
+    ],
+    "title": "میوه و سبزیجات تازه",
+    "slug": "fruits-vegetables"
+  },
+  {
+    "id": 731278,
+    "title": "سبزیجات و صیفی جات تازه",
+    "slug": "vegetables",
+    "parent": "میوه و سبزیجات تازه"
+  },
+  {
+    "id": 731279,
+    "title": "میوه تازه",
+    "slug": "fruit",
+    "parent": "میوه و سبزیجات تازه"
+  },
+  {
+    "id": [
+      731210
+    ],
+    "title": "آرایشی و بهداشتی",
+    "slug": "health-beauty"
+  },
+  {
+    "id": 731266,
+    "title": "بهداشت زنان",
+    "slug": "womens-health",
+    "parent": "آرایشی و بهداشتی"
+  },
+  {
+    "id": 731267,
+    "title": "شامپو و مراقبت مو",
+    "slug": "hair-care",
+    "parent": "آرایشی و بهداشتی"
+  },
+  {
+    "id": 731268,
+    "title": "بهداشت جنسی",
+    "slug": "sexual-health",
+    "parent": "آرایشی و بهداشتی"
+  },
+  {
+    "id": 731269,
+    "title": "بهداشت و مراقبت بدن",
+    "slug": "body-care",
+    "parent": "آرایشی و بهداشتی"
+  },
+  {
+    "id": 731270,
+    "title": "بهداشت و مراقبت صورت",
+    "slug": "face-care",
+    "parent": "آرایشی و بهداشتی"
+  },
+  {
+    "id": 731271,
+    "title": "دستمال مرطوب",
+    "slug": "wipes",
+    "parent": "آرایشی و بهداشتی"
+  },
+  {
+    "id": 731272,
+    "title": "آرایش مو",
+    "slug": "hair-styling",
+    "parent": "آرایشی و بهداشتی"
+  },
+  {
+    "id": 731273,
+    "title": "بهداشت دهان و دندان",
+    "slug": "oral-health",
+    "parent": "آرایشی و بهداشتی"
+  },
+  {
+    "id": 731274,
+    "title": "آرایشی و عطر و ادکلن",
+    "slug": "beauty-perfume",
+    "parent": "آرایشی و بهداشتی"
+  },
+  {
+    "id": 731275,
+    "title": "اصلاح صورت و بدن",
+    "slug": "shaving-hair-removal",
+    "parent": "آرایشی و بهداشتی"
+  },
+  {
+    "id": 731276,
+    "title": "صابون",
+    "slug": "soap",
+    "parent": "آرایشی و بهداشتی"
+  },
+  {
+    "id": 731277,
+    "title": "اسپری و ضدتعریق",
+    "slug": "deodorants-spray",
+    "parent": "آرایشی و بهداشتی"
+  },
+  {
+    "id": [
+      731209
+    ],
+    "title": "کودک و نوزاد",
+    "slug": "child-baby"
+  },
+  {
+    "id": 731261,
+    "title": "اسباب بازی و بازی فکری",
+    "slug": "toys-mental-game",
+    "parent": "کودک و نوزاد"
+  },
+  {
+    "id": 731262,
+    "title": "مواد غذایی کودک",
+    "slug": "baby-food",
+    "parent": "کودک و نوزاد"
+  },
+  {
+    "id": 731263,
+    "title": "بهداشت کودک",
+    "slug": "child-health",
+    "parent": "کودک و نوزاد"
+  },
+  {
+    "id": 731264,
+    "title": "لوازم کودک و نوزاد",
+    "slug": "baby-child-products",
+    "parent": "کودک و نوزاد"
+  },
+  {
+    "id": 731265,
+    "title": "پوشک کودک",
+    "slug": "baby-diaper",
+    "parent": "کودک و نوزاد"
+  },
+  {
+    "id": [
+      731220
+    ],
+    "title": "دخانیات",
+    "slug": "smoking"
+  },
+  {
+    "id": 731334,
+    "title": "سیگار",
+    "slug": "cigarettes",
+    "parent": "دخانیات"
+  },
+  {
+    "id": 731335,
+    "title": "توتون و تنباکو",
+    "slug": "tobacco",
+    "parent": "دخانیات"
+  },
+  {
+    "id": 731337,
+    "title": "ملزومات دخانیات",
+    "slug": "tobacco-essentials",
+    "parent": "دخانیات"
+  },
+  {
+    "id": [
+      731208
+    ],
+    "title": "صبحانه",
+    "slug": "breakfast"
+  },
+  {
+    "id": 731255,
+    "title": "غلات صبحانه",
+    "slug": "breakfast-cereal",
+    "parent": "صبحانه"
+  },
+  {
+    "id": 731256,
+    "title": "مربا",
+    "slug": "jam",
+    "parent": "صبحانه"
+  },
+  {
+    "id": 731257,
+    "title": "عسل",
+    "slug": "honey",
+    "parent": "صبحانه"
+  },
+  {
+    "id": 731258,
+    "title": "حلوا ارده و شیره",
+    "slug": "halva-arde",
+    "parent": "صبحانه"
+  },
+  {
+    "id": 731259,
+    "title": "شکلات صبحانه",
+    "slug": "breakfast-chocolate",
+    "parent": "صبحانه"
+  },
+  {
+    "id": 731260,
+    "title": "کره بادام زمینی و کرم بیسکویت",
+    "slug": "peanut-butter-cream-biscuits",
+    "parent": "صبحانه"
+  },
+  {
+    "id": [
+      731212
+    ],
+    "title": "چاشنی و افزودنی",
+    "slug": "spice-seasoning"
+  },
+  {
+    "id": 731280,
+    "title": "سس",
+    "slug": "sauce",
+    "parent": "چاشنی و افزودنی"
+  },
+  {
+    "id": 731281,
+    "title": "زعفران",
+    "slug": "saffron",
+    "parent": "چاشنی و افزودنی"
+  },
+  {
+    "id": 731282,
+    "title": "ادویه و افزودنی",
+    "slug": "spice",
+    "parent": "چاشنی و افزودنی"
+  },
+  {
+    "id": 731283,
+    "title": "خیارشور و زیتون",
+    "slug": "pickled-cucumber-olive",
+    "parent": "چاشنی و افزودنی"
+  },
+  {
+    "id": 731284,
+    "title": "ترشی و شور",
+    "slug": "pickles",
+    "parent": "چاشنی و افزودنی"
+  },
+  {
+    "id": 731285,
+    "title": "آبلیمو و سرکه و آبغوره",
+    "slug": "liquid-seasoning",
+    "parent": "چاشنی و افزودنی"
+  },
+  {
+    "id": [
+      731213
+    ],
+    "title": "کنسرو، غذای آماده و منجمد",
+    "slug": "canned-prepared-food"
+  },
+  {
+    "id": 731286,
+    "title": "تون ماهی",
+    "slug": "tuna-fish",
+    "parent": "کنسرو، غذای آماده و منجمد"
+  },
+  {
+    "id": 731287,
+    "title": "غذای نیمه آماده",
+    "slug": "ready-to-cook",
+    "parent": "کنسرو، غذای آماده و منجمد"
+  },
+  {
+    "id": 731288,
+    "title": "مایه غذا",
+    "slug": "semi-prepared-food",
+    "parent": "کنسرو، غذای آماده و منجمد"
+  },
+  {
+    "id": 731289,
+    "title": "غذای آماده مصرف",
+    "slug": "food-to-go",
+    "parent": "کنسرو، غذای آماده و منجمد"
+  },
+  {
+    "id": 731290,
+    "title": "غذای نیمه آماده منجمد و یخچالی",
+    "slug": "frozen-food",
+    "parent": "کنسرو، غذای آماده و منجمد"
+  },
+  {
+    "id": 731291,
+    "title": "کمپوت",
+    "slug": "compote",
+    "parent": "کنسرو، غذای آماده و منجمد"
+  },
+  {
+    "id": 731292,
+    "title": "کنسرو سبزیجات و حبوبات",
+    "slug": "canned-vegetables",
+    "parent": "کنسرو، غذای آماده و منجمد"
+  },
+  {
+    "id": 731293,
+    "title": "سبزیجات و صیفیجات منجمد",
+    "slug": "frozen-vegetables",
+    "parent": "کنسرو، غذای آماده و منجمد"
+  },
+  {
+    "id": 731294,
+    "title": "انواع خمیر",
+    "slug": "dough",
+    "parent": "کنسرو، غذای آماده و منجمد"
+  },
+  {
+    "id": [
+      731214
+    ],
+    "title": "پروتیین و تخم مرغ",
+    "slug": "meat-egg"
+  },
+  {
+    "id": 731295,
+    "title": "تخم مرغ و ماکیان",
+    "slug": "egg",
+    "parent": "پروتیین و تخم مرغ"
+  },
+  {
+    "id": 731296,
+    "title": "گوشت قرمز",
+    "slug": "meat",
+    "parent": "پروتیین و تخم مرغ"
+  },
+  {
+    "id": 731297,
+    "title": "مرغ",
+    "slug": "chicken",
+    "parent": "پروتیین و تخم مرغ"
+  },
+  {
+    "id": 731298,
+    "title": "سوسیس و کالباس",
+    "slug": "sausages",
+    "parent": "پروتیین و تخم مرغ"
+  },
+  {
+    "id": 731299,
+    "title": "ماهی و میگو",
+    "slug": "fish-shrimp",
+    "parent": "پروتیین و تخم مرغ"
+  },
+  {
+    "id": 731300,
+    "title": "سایر گوشت ها",
+    "slug": "other-meats",
+    "parent": "پروتیین و تخم مرغ"
+  },
+  {
+    "id": [
+      731216
+    ],
+    "title": "خشکبار، دسر و شیرینی",
+    "slug": "dried-fruits-nuts"
+  },
+  {
+    "id": 731311,
+    "title": "آجیل و تخمه",
+    "slug": "nuts-seeds",
+    "parent": "خشکبار، دسر و شیرینی"
+  },
+  {
+    "id": 731312,
+    "title": "خشکبار و شیرینی",
+    "slug": "dried-fruits-sweets",
+    "parent": "خشکبار، دسر و شیرینی"
+  },
+  {
+    "id": 731313,
+    "title": "خرما",
+    "slug": "date",
+    "parent": "خشکبار، دسر و شیرینی"
+  },
+  {
+    "id": 731314,
+    "title": "دسر",
+    "slug": "dessert",
+    "parent": "خشکبار، دسر و شیرینی"
+  },
+  {
+    "id": 731315,
+    "title": "ژله",
+    "slug": "jelly",
+    "parent": "خشکبار، دسر و شیرینی"
+  },
+  {
+    "id": 731316,
+    "title": "پودر کیک و پنکیک",
+    "slug": "cake-powder",
+    "parent": "خشکبار، دسر و شیرینی"
+  },
+  {
+    "id": [
+      731217
+    ],
+    "title": "دستمال و شوینده",
+    "slug": "tissues-household-cleaning"
+  },
+  {
+    "id": 731317,
+    "title": "دستمال کاغذی و توالت",
+    "slug": "tissues-toilet-paper",
+    "parent": "دستمال و شوینده"
+  },
+  {
+    "id": 731318,
+    "title": "شستشوی ظروف",
+    "slug": "dish-washing",
+    "parent": "دستمال و شوینده"
+  },
+  {
+    "id": 731319,
+    "title": "شستشوی لباس",
+    "slug": "laundry-detergent",
+    "parent": "دستمال و شوینده"
+  },
+  {
+    "id": 731320,
+    "title": "فوم و مایع دستشویی",
+    "slug": "hand-wash-liquid",
+    "parent": "دستمال و شوینده"
+  },
+  {
+    "id": 731321,
+    "title": "نظافت خانه و آشپزخانه",
+    "slug": "household-cleaning",
+    "parent": "دستمال و شوینده"
+  },
+  {
+    "id": 731322,
+    "title": "نظافت حمام و سرویس بهداشتی",
+    "slug": "toilet-cleaning",
+    "parent": "دستمال و شوینده"
+  },
+  {
+    "id": [
+      731218
+    ],
+    "title": "خانه و سبک زندگی",
+    "slug": "home-lifestyle"
+  },
+  {
+    "id": 731323,
+    "title": "لوازم یکبارمصرف",
+    "slug": "disposable-supplies",
+    "parent": "خانه و سبک زندگی"
+  },
+  {
+    "id": 731324,
+    "title": "کیسه فریزر",
+    "slug": "freezer-bag",
+    "parent": "خانه و سبک زندگی"
+  },
+  {
+    "id": 731325,
+    "title": "کیسه زباله",
+    "slug": "garbage-bag",
+    "parent": "خانه و سبک زندگی"
+  },
+  {
+    "id": 731326,
+    "title": "لوازم پیک نیک و سفر",
+    "slug": "picnic-supplies",
+    "parent": "خانه و سبک زندگی"
+  },
+  {
+    "id": 731327,
+    "title": "لوازم خانه و آشپزخانه",
+    "slug": "home-kitchen-appliances",
+    "parent": "خانه و سبک زندگی"
+  },
+  {
+    "id": 731328,
+    "title": "کتاب و لوازم تحریر",
+    "slug": "stationery",
+    "parent": "خانه و سبک زندگی"
+  },
+  {
+    "id": 731329,
+    "title": "ابزار سلامت",
+    "slug": "healthtools",
+    "parent": "خانه و سبک زندگی"
+  },
+  {
+    "id": 731330,
+    "title": "ابزار و خودرو",
+    "slug": "health-tools",
+    "parent": "خانه و سبک زندگی"
+  },
+  {
+    "id": [
+      731219
+    ],
+    "title": "لوازم برقی و دیجیتال",
+    "slug": "digital-appliances"
+  },
+  {
+    "id": 731331,
+    "title": "نور و روشنایی",
+    "slug": "lighting",
+    "parent": "لوازم برقی و دیجیتال"
+  },
+  {
+    "id": 731332,
+    "title": "باتری، محافظ و رابط",
+    "slug": "battery-power-strips",
+    "parent": "لوازم برقی و دیجیتال"
+  },
+  {
+    "id": 731538,
+    "title": "کابل، شارژر و مبدل",
+    "slug": "cables-chargers-adapters",
+    "parent": "لوازم برقی و دیجیتال"
+  },
+  {
+    "id": [
+      731221
+    ],
+    "title": "مد و پوشاک",
+    "slug": "fashion"
+  },
+  {
+    "id": 731339,
+    "title": "جوراب",
+    "slug": "socks",
+    "parent": "مد و پوشاک"
+  },
+  {
+    "id": [
+      731222
+    ],
+    "title": "پت شاپ",
+    "slug": "pet-shop"
+  },
+  {
+    "id": 731343,
+    "title": "غذا و کنسرو حیوانات",
+    "slug": "animal-food",
+    "parent": "پت شاپ"
+  },
+  {
+    "id": 731345,
+    "title": "لوازم بهداشت حیوانات",
+    "slug": "animal-health-supplies",
+    "parent": "پت شاپ"
+  }
+]

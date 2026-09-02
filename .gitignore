@@ -1,6 +1,8 @@
-# Dependencies
 **/node_modules/
 backend/venv/
+__pycache__/
+*.pyc
+.claude/
 
 # Local databases
 backend/db.sqlite3

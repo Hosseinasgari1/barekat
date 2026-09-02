@@ -3,15 +3,15 @@
 # It automatically prefers Docker Compose if Docker is active; otherwise, it runs them locally.
 
 $DockerActive = $false
-try {
-    # Check if Docker daemon is running
-    docker info > $null 2>&1
-    if ($LASTEXITCODE -eq 0) {
-        $DockerActive = $true
-    }
-} catch {
-    $DockerActive = $false
-}
+# try {
+#     # Check if Docker daemon is running
+#     docker info > $null 2>&1
+#     if ($LASTEXITCODE -eq 0) {
+#         $DockerActive = $true
+#     }
+# } catch {
+#     $DockerActive = $false
+# }
 
 Write-Host "=========================================" -ForegroundColor Green
 Write-Host "   Barekat Platform Startup Manager      " -ForegroundColor Green
